@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.newraspisanie.model.Para;
@@ -37,8 +35,6 @@ public class PageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf("getItem", "" + 100);
         View rootView = inflater.inflate(R.layout.fragment, container, false);
-        //Picasso.with(context).load(R.drawable.landing_screen).into(imageView1);
-//        ((ImageView) rootView.findViewById(R.id.image)).setImageResource(args.getInt(ARG_OBJECT));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, new IntentFilter(RECEIVER_FILTER));
         listener = new Listener() {
             @Override
