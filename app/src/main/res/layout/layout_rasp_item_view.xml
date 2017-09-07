@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/survey_navigation_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="@color/colorPrimaryLight"
+        app:cardElevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:textColor="#000000"
+            android:text="asdasdasdasd"
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
