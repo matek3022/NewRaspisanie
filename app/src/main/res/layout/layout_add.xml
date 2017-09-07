@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:hint="название пары"
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="имя препода"
+        android:id="@+id/prepod_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="аудитория"
+        android:id="@+id/auditory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="номер пары"
+        android:inputType="numberDecimal"
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="день недели"
+        android:inputType="numberDecimal"
+        android:id="@+id/week_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
