@@ -1,12 +1,10 @@
 package com.example.newraspisanie;
 
 import android.app.AlertDialog;
-import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
@@ -111,9 +109,9 @@ public class SwipeViewActivity extends FragmentActivity {
         mPagerAdapter =
                 new PagerAdapter(
                         getSupportFragmentManager());
-        WallpaperManager wm = WallpaperManager.getInstance(getApplicationContext());
-        Drawable drawable = wm.getFastDrawable();
-        (findViewById(R.id.pager)).setBackground(drawable);
+//        WallpaperManager wm = WallpaperManager.getInstance(getApplicationContext());
+//        Drawable drawable = wm.getFastDrawable();
+//        (findViewById(R.id.pager)).setBackground(drawable);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mPagerAdapter);
         PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip);

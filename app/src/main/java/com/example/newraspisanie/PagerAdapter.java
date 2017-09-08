@@ -11,12 +11,12 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     }
 
     public int getDrawableImage (int position){
-        if (position==1) return R.drawable.i1;
-        if (position==2) return R.drawable.i2;
-        if (position==3) return R.drawable.i3;
-        if (position==4) return R.drawable.i4;
-        if (position==5) return R.drawable.i5;
-        if (position==6) return R.drawable.i6;
+//        if (position==1) return R.drawable.i1;
+//        if (position==2) return R.drawable.i2;
+//        if (position==3) return R.drawable.i3;
+//        if (position==4) return R.drawable.i4;
+//        if (position==5) return R.drawable.i5;
+//        if (position==6) return R.drawable.i6;
         return 0;
     }
     public String getTitle (int position){
