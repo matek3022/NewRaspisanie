@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-// adapter for ViewPager
 public class PagerAdapter extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm) {
         super(fm);
@@ -32,10 +31,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int i) {
         Fragment fragment = new PageFragment();
-
         Bundle args = new Bundle();
-        // Our object is just an integer :-P
-        args.putInt(PageFragment.ARG_OBJECT, getDrawableImage(i+1));
+        args.putInt(PageFragment.ARG_OBJECT, i);
         fragment.setArguments(args);
         return fragment;
     }

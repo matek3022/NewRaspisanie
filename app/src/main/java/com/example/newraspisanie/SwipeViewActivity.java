@@ -5,18 +5,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.newraspisanie.model.Para;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -123,10 +122,11 @@ public class SwipeViewActivity extends FragmentActivity {
                 builder.setView(innerView);
                 final TextView number = (TextView) innerView.findViewById(R.id.number);
                 final TextView name = (TextView) innerView.findViewById(R.id.name);
+                final TextView numberDay = (TextView) innerView.findViewById(R.id.week_day);
                 builder.setPositiveButton("Добавить", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(PageFragment.RECEIVER_FILTER);
+                        Intent intent = new Intent(PageFragment.RECEIVER_FILTER + numberDay.getText().toString());
                         intent.putExtra(PageFragment.ARG_OBJECT, new Para(Integer.valueOf(number.getText().toString()), 0, name.getText().toString(), null, null, null));
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                     }

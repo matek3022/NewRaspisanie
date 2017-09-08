@@ -5,23 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.newraspisanie.model.Para;
 
-//fragment (small activity) class
 public class PageFragment extends Fragment {
     public static final String ARG_OBJECT = "object";
     public static final String RECEIVER_FILTER = "com.example.newraspisanie.filter_receiajgfeasdbg";
     private Para para;
+    private int page;
     private Listener listener;
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -37,9 +35,8 @@ public class PageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf("getItem", "" + 100);
         View rootView = inflater.inflate(R.layout.fragment, container, false);
-        //Picasso.with(context).load(R.drawable.landing_screen).into(imageView1);
-//        ((ImageView) rootView.findViewById(R.id.image)).setImageResource(args.getInt(ARG_OBJECT));
-        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, new IntentFilter(RECEIVER_FILTER));
+        page = getArguments().getInt(ARG_OBJECT);
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, new IntentFilter(RECEIVER_FILTER + page));
         listener = new Listener() {
             @Override
             public void paraChanged() {
