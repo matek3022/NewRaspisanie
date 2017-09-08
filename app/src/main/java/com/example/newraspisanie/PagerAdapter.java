@@ -32,7 +32,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
         Fragment fragment = new PageFragment();
         Bundle args = new Bundle();
-        args.putInt(PageFragment.ARG_OBJECT, i);
+        args.putInt(PageFragment.ARG_OBJECT, i + 1);
         fragment.setArguments(args);
         return fragment;
     }

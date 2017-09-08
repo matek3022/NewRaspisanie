@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00c853</color>
+    <color name="colorPrimary">#8200c853</color>
     <color name="colorPrimaryLight">#5efc82</color>
     <color name="colorPrimaryDark">#009624</color>
     <color name="colorAccent">#d500f9</color>
+    <color name="practicColor">#B6fcc19d</color>
+    <color name="lekciaColor">#B66cbaac</color>
+    <color name="labaColor">#B6b8c7d4</color>
+    <color name="nothingColor">#34cccccc</color>
 </resources>
