@@ -1,15 +1,15 @@
 package com.example.newraspisanie;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class SwipeViewActivity extends FragmentActivity {
+    public class SwipeViewActivity extends AppCompatActivity {
     PagerAdapter mPagerAdapter;
     ViewPager mViewPager;
     Context context;

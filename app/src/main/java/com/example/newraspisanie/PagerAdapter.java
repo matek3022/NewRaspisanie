@@ -19,7 +19,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 //        if (position==6) return R.drawable.i6;
         return 0;
     }
-    public String getTitle (int position){
+    public static String getTitle (int position){
         if (position==1) return "MON";
         if (position==2) return "TUE";
         if (position==3) return "WED";
