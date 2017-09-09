@@ -10,22 +10,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
     }
 
-    public int getDrawableImage (int position){
-//        if (position==1) return R.drawable.i1;
-//        if (position==2) return R.drawable.i2;
-//        if (position==3) return R.drawable.i3;
-//        if (position==4) return R.drawable.i4;
-//        if (position==5) return R.drawable.i5;
-//        if (position==6) return R.drawable.i6;
-        return 0;
-    }
     public static String getTitle (int position){
-        if (position==1) return "MON";
-        if (position==2) return "TUE";
-        if (position==3) return "WED";
-        if (position==4) return "THU";
-        if (position==5) return "FRI";
-        if (position==6) return "SAT";
+        if (position==1) return "Понедельник";
+        if (position==2) return "Вторник";
+        if (position==3) return "Среда";
+        if (position==4) return "Четверг";
+        if (position==5) return "Пятница";
+        if (position==6) return "Суббота";
         return "";
     }
     @Override
@@ -42,8 +33,4 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         return 6;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return getTitle(position+1);
-    }
 }

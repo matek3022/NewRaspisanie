@@ -3,13 +3,12 @@ package com.example.newraspisanie;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -109,14 +108,13 @@ import java.util.TimeZone;
         mPagerAdapter =
                 new PagerAdapter(
                         getSupportFragmentManager());
-//        WallpaperManager wm = WallpaperManager.getInstance(getApplicationContext());
-//        Drawable drawable = wm.getFastDrawable();
-//        (findViewById(R.id.pager)).setBackground(drawable);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mPagerAdapter);
-        PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
-        pagerTabStrip.setTabIndicatorColor(Color.WHITE);
-        pagerTabStrip.setTextColor(Color.WHITE);
+//        PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
+//        pagerTabStrip.setTabIndicatorColor(Color.WHITE);
+//        pagerTabStrip.setTextColor(Color.WHITE);
 
         Date dateCurr = new Date(System.currentTimeMillis());
         SimpleDateFormat hourInDay = new SimpleDateFormat("kk");
@@ -128,12 +126,6 @@ import java.util.TimeZone;
         Log.wtf("day_format",time_dayOfWeek+" "+time_hourInDay);
         mViewPager.setCurrentItem(getNumberWindow(time_dayOfWeek,time_hourInDay));
         context = this;
-        findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAddDialog();
-            }
-        });
     }
 
     private void initLists() {

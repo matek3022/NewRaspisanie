@@ -100,8 +100,8 @@
     <color name="colorPrimaryLight">#5efc82</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#d500f9</color>
-    <color name="practicColor">#82fcc19d</color>
-    <color name="lekciaColor">#826cbaac</color>
-    <color name="labaColor">#82b8c7d4</color>
+    <color name="practicColor">#9Cfcc19d</color>
+    <color name="lekciaColor">#9C6cbaac</color>
+    <color name="labaColor">#9Cb8c7d4</color>
     <color name="nothingColor">#1Aaaaaaa</color>
 </resources>
