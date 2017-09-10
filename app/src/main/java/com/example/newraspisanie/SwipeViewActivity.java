@@ -39,6 +39,8 @@ public class SwipeViewActivity extends AppCompatActivity {
     Calendar dateAndTime = Calendar.getInstance();
     int currWeek;
     int currDay;
+    String time_dayOfWeek;
+    String time_hourInDay;
     private final ArrayList<DictionaryItem> numberList = new ArrayList<>();
     private final ArrayList<DictionaryItem> weekList = new ArrayList<>();
     private final ArrayList<DictionaryItem> weekDayList = new ArrayList<>();
@@ -111,6 +113,28 @@ public class SwipeViewActivity extends AppCompatActivity {
         return 0;
     }
 
+    public boolean getChangeNextWeek(String dayweek, String hourday) {
+        int hour = Integer.parseInt(hourday);
+        switch (dayweek) {
+            case "Sat":
+                if (hour < 18) return false;
+                else return true;
+            case "Sun":
+                return true;
+            case "Saturday":
+                if (hour < 18) return false;
+                else return true;
+            case "Sunday":
+                return true;
+            case "сб":
+                if (hour < 18) return false;
+                else return true;
+            case "вс":
+                return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -118,7 +142,14 @@ public class SwipeViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_swipe_view);
         initLists();
         dateAndTime.setTimeInMillis(PreferenceManager.getInstance(this).getFirstDay());
-        currWeek = calculateCurrWeekAndSetWeekCounter();
+        Date dateCurr = new Date(System.currentTimeMillis());
+        SimpleDateFormat hourInDay = new SimpleDateFormat("kk");
+        SimpleDateFormat dayOfWeek = new SimpleDateFormat("E");
+        hourInDay.setTimeZone(TimeZone.getDefault());
+        dayOfWeek.setTimeZone(TimeZone.getDefault());
+        time_dayOfWeek = dayOfWeek.format(dateCurr);
+        time_hourInDay = hourInDay.format(dateCurr);
+        currWeek = calculateCurrWeekAndSetWeekCounter(time_dayOfWeek, time_hourInDay);
         mPagerAdapter =
                 new PagerAdapter(
                         getSupportFragmentManager(), currWeek);
@@ -144,13 +175,7 @@ public class SwipeViewActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-        Date dateCurr = new Date(System.currentTimeMillis());
-        SimpleDateFormat hourInDay = new SimpleDateFormat("kk");
-        SimpleDateFormat dayOfWeek = new SimpleDateFormat("E");
-        hourInDay.setTimeZone(TimeZone.getDefault());
-        dayOfWeek.setTimeZone(TimeZone.getDefault());
-        String time_dayOfWeek = dayOfWeek.format(dateCurr);
-        String time_hourInDay = hourInDay.format(dateCurr);
+
         Log.wtf("day_format", time_dayOfWeek + " " + time_hourInDay);
         mViewPager.setCurrentItem(getNumberWindow(time_dayOfWeek, time_hourInDay));
         context = this;
@@ -184,15 +209,15 @@ public class SwipeViewActivity extends AppCompatActivity {
         }
     }
 
-    private int calculateCurrWeekAndSetWeekCounter() {
+    private int calculateCurrWeekAndSetWeekCounter(String dayweek, String hourday) {
         Date dateCurr = new Date(System.currentTimeMillis());
         Date dateFirst = new Date(dateAndTime.getTimeInMillis());
         SimpleDateFormat weekInYear = new SimpleDateFormat("w");
         weekInYear.setTimeZone(TimeZone.getDefault());
         int currWeek = Integer.valueOf(weekInYear.format(dateCurr));
         int firstWeek = Integer.valueOf(weekInYear.format(dateFirst));
-        ((TextView)findViewById(R.id.week_counter)).setText("Текущая неделя: " + String.valueOf(currWeek - firstWeek + 1));
-        return (((currWeek - firstWeek) & 2) == 0) ? 1 : 2;
+        ((TextView)findViewById(R.id.week_counter)).setText("Текущая неделя: " + String.valueOf(currWeek - firstWeek + 1 + (getChangeNextWeek(dayweek, hourday) ? 1 : 0)));
+        return (((currWeek - firstWeek) & 2) == 0) ? (getChangeNextWeek(dayweek, hourday) ? 1 : 2) : (getChangeNextWeek(dayweek, hourday) ? 2 : 1);
     }
 
     private void notifyDataChanged() {
@@ -256,7 +281,7 @@ public class SwipeViewActivity extends AppCompatActivity {
                         dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         setInitialDateTime(date);
                         PreferenceManager.getInstance(context).setFirstDay(dateAndTime.getTimeInMillis());
-                        currWeek = calculateCurrWeekAndSetWeekCounter();
+                        currWeek = calculateCurrWeekAndSetWeekCounter(time_dayOfWeek, time_hourInDay);
                         notifyDataChanged();
                     }
                 },
