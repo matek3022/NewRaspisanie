@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.newraspisanie">
-    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/launcher"
-        android:label=""
+        android:label="Time table"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SwipeViewActivity"
@@ -17,19 +16,4 @@
             </intent-filter>
         </activity>
     </application>
-
-    <!--Пуши-->
-    <service android:name="com.example.newraspisanie.service.MyFirebaseMessagingService">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
-
-    <service android:name="com.example.newraspisanie.service.MyFirebaseInstanceIDService">
-        <intent-filter>
-            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-        </intent-filter>
-    </service>
-    <!--Конец пушей-->
-
 </manifest>
