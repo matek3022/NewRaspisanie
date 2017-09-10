@@ -1,14 +1,15 @@
 package com.example.newraspisanie;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -160,10 +161,20 @@ public class PageFragment extends Fragment {
                 view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        preferenceManager.clearPara(week, page, 1);
-                        one.clearView();
-                        showDeleteMessage();
-                        dialog.dismiss();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                        builder1.setMessage("Вы действительно хотите удалить пару?");
+                        builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                preferenceManager.clearPara(week, page, 1);
+                                one.clearView();
+                                showDeleteMessage();
+                                dialog.dismiss();
+                            }
+                        });
+                        builder1.setNegativeButton("Нет", null);
+                        builder1.show();
+
                     }
                 });
                 dialog.show();
@@ -190,10 +201,20 @@ public class PageFragment extends Fragment {
                 view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        preferenceManager.clearPara(week, page, 2);
-                        two.clearView();
-                        showDeleteMessage();
-                        dialog.dismiss();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                        builder1.setMessage("Вы действительно хотите удалить пару?");
+                        builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                preferenceManager.clearPara(week, page, 2);
+                                two.clearView();
+                                showDeleteMessage();
+                                dialog.dismiss();
+                            }
+                        });
+                        builder1.setNegativeButton("Нет", null);
+                        builder1.show();
+
                     }
                 });
                 dialog.show();
@@ -220,10 +241,20 @@ public class PageFragment extends Fragment {
                 view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        preferenceManager.clearPara(week, page, 3);
-                        three.clearView();
-                        showDeleteMessage();
-                        dialog.dismiss();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                        builder1.setMessage("Вы действительно хотите удалить пару?");
+                        builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                preferenceManager.clearPara(week, page, 3);
+                                three.clearView();
+                                showDeleteMessage();
+                                dialog.dismiss();
+                            }
+                        });
+                        builder1.setNegativeButton("Нет", null);
+                        builder1.show();
+
                     }
                 });
                 dialog.show();
@@ -251,10 +282,20 @@ public class PageFragment extends Fragment {
                 view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        preferenceManager.clearPara(week, page, 4);
-                        four.clearView();
-                        showDeleteMessage();
-                        dialog.dismiss();
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                        builder1.setMessage("Вы действительно хотите удалить пару?");
+                        builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                preferenceManager.clearPara(week, page, 4);
+                                four.clearView();
+                                showDeleteMessage();
+                                dialog.dismiss();
+                            }
+                        });
+                        builder1.setNegativeButton("Нет", null);
+                        builder1.show();
                     }
                 });
                 dialog.show();
@@ -281,10 +322,19 @@ public class PageFragment extends Fragment {
                 view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        preferenceManager.clearPara(week, page, 5);
-                        five.clearView();
-                        showDeleteMessage();
-                        dialog.dismiss();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                        builder1.setMessage("Вы действительно хотите удалить пару?");
+                        builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                preferenceManager.clearPara(week, page, 5);
+                                five.clearView();
+                                showDeleteMessage();
+                                dialog.dismiss();
+                            }
+                        });
+                        builder1.setNegativeButton("Нет", null);
+                        builder1.show();
                     }
                 });
                 dialog.show();
@@ -311,10 +361,19 @@ public class PageFragment extends Fragment {
                 view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        preferenceManager.clearPara(week, page, 6);
-                        six.clearView();
-                        showDeleteMessage();
-                        dialog.dismiss();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                        builder1.setMessage("Вы действительно хотите удалить пару?");
+                        builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                preferenceManager.clearPara(week, page, 6);
+                                six.clearView();
+                                showDeleteMessage();
+                                dialog.dismiss();
+                            }
+                        });
+                        builder1.setNegativeButton("Нет", null);
+                        builder1.show();
                     }
                 });
                 dialog.show();

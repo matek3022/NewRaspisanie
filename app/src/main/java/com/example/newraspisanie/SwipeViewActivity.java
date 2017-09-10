@@ -223,7 +223,7 @@ public class SwipeViewActivity extends AppCompatActivity {
                 builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Utils.setDemoList(context);
+                        Utils.set6412List(context);
                         notifyDataChanged();
                         dialog.dismiss();
                     }
