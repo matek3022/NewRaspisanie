@@ -218,6 +218,7 @@ public class SwipeViewActivity extends AppCompatActivity {
         view.findViewById(R.id.add_demo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Utils.setDemoList(context);
                 notifyDataChanged();
                 dialog.dismiss();
             }

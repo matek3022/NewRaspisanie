@@ -7,7 +7,6 @@ import java.io.Serializable;
  */
 
 public class Para implements Serializable {
-    private String time;
     private String name;
     private String auditory;
     private int number;
@@ -26,17 +25,15 @@ public class Para implements Serializable {
         this.number = number;
     }
 
-    public Para(int number, int weekDay, String name, String auditory, String namePrepod, TypePara typePara) {
+    public Para(int week, int weekDay, int number, String name, String namePrepod, String auditory, TypePara typePara, String extended) {
         this.number = number;
         this.weekDay = weekDay;
+        this.week = week;
         this.name = name;
         this.auditory = auditory;
         this.namePrepod = namePrepod;
         this.typePara = typePara;
-    }
-
-    public String getTime() {
-        return time;
+        this.extended = extended;
     }
 
     public String getName() {
@@ -69,10 +66,6 @@ public class Para implements Serializable {
 
     public String getExtended() {
         return extended;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public void setName(String name) {
