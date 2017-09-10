@@ -5,7 +5,7 @@
     <TextView
         android:id="@+id/change"
         android:textColor="@color/textColor"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:paddingLeft="@dimen/default_padding"
         android:gravity="center|left"
         android:text="Изменить или добавить"
@@ -14,7 +14,7 @@
     <TextView
         android:id="@+id/delete"
         android:textColor="@color/textColor"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:paddingLeft="@dimen/default_padding"
         android:gravity="center|start"
         android:text="Удалить"
