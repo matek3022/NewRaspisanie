@@ -354,7 +354,7 @@ public class SwipeViewActivity extends AppCompatActivity {
                     showAddDialog(para);
                     Toast.makeText(context, "Пустые параметры: неделя/день недели/номер пары/тип пары", Toast.LENGTH_LONG).show();
                 } else {
-                    Intent intent = new Intent(PageFragment.PARA_CHANGE_RECEIVER_FILTER + numberDay.getSelected().getId() + "_" + numberDay.getSelected().getId());
+                    Intent intent = new Intent(PageFragment.PARA_CHANGE_RECEIVER_FILTER + numberDay.getSelected().getId() + "_" + numberWeek.getSelected().getId());
                     PreferenceManager.getInstance(context).setPara(para);
                     intent.putExtra(PageFragment.ARG_OBJECT, para);
                     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
