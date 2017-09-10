@@ -19,31 +19,28 @@
         android:id="@+id/auditory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Дополнительное поле"
+        android:id="@+id/extended"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <com.example.newraspisanie.view.DictionaryView
         android:layout_marginTop="@dimen/default_padding"
-        android:layout_marginLeft="@dimen/default_padding"
-        android:layout_marginRight="@dimen/default_padding"
         android:id="@+id/numberWeek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.example.newraspisanie.view.DictionaryView
         android:layout_marginTop="@dimen/default_padding"
-        android:layout_marginLeft="@dimen/default_padding"
-        android:layout_marginRight="@dimen/default_padding"
         android:id="@+id/week_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.example.newraspisanie.view.DictionaryView
         android:layout_marginTop="@dimen/default_padding"
-        android:layout_marginLeft="@dimen/default_padding"
-        android:layout_marginRight="@dimen/default_padding"
         android:id="@+id/number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.example.newraspisanie.view.DictionaryView
         android:layout_marginTop="@dimen/default_padding"
-        android:layout_marginLeft="@dimen/default_padding"
-        android:layout_marginRight="@dimen/default_padding"
         android:id="@+id/type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

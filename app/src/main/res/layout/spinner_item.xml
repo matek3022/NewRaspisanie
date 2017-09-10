@@ -9,6 +9,6 @@
     android:paddingLeft="@dimen/default_padding"
     android:paddingRight="@dimen/default_padding"
     android:textSize="16dp"
-    android:textColor="@color/colorPrimaryDark"
+    android:textColor="@color/textColor"
     android:ellipsize="marquee"
     android:textAlignment="inherit"/>

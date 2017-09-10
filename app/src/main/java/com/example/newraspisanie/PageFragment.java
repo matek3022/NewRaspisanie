@@ -1,5 +1,6 @@
 package com.example.newraspisanie;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,9 +25,11 @@ import butterknife.ButterKnife;
 //fragment (small activity) class
 public class PageFragment extends Fragment {
     public static final String ARG_OBJECT = "object";
+    public static final String ARG_CURR_WEEK = "curr_week";
     public static final String RECEIVER_FILTER = "com.example.newraspisanie.filter_receiajgfeasdbg";
     private Para para;
     private int page;
+    private int week;
     private PreferenceManager preferenceManager;
     private Listener listener;
     @BindView(R.id.one)
@@ -57,6 +60,7 @@ public class PageFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment, container, false);
         ButterKnife.bind(this, rootView);
         page = getArguments().getInt(ARG_OBJECT);
+        week = getArguments().getInt(ARG_CURR_WEEK);
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, new IntentFilter(RECEIVER_FILTER + page + "_" + 1));
         preferenceManager = PreferenceManager.getInstance(getContext());
         return rootView;
@@ -68,7 +72,7 @@ public class PageFragment extends Fragment {
         initListeners();
         if (para == null) {
             for (int i = 0; i < 6; i++) {
-                para = preferenceManager.getPara(1, page, i + 1);
+                para = preferenceManager.getPara(week, page, i + 1);
                 listener.paraChanged();
             }
         }
@@ -113,117 +117,183 @@ public class PageFragment extends Fragment {
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Para currPara = one.getPara();
-                if (one.getPara() == null) {
-                    currPara = new Para(1, page, 1);
-                }
-                ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = getActivity().getLayoutInflater().inflate(R.layout.alert_dialog_action_para_pressed, null);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+                view.findViewById(R.id.change).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Para currPara = one.getPara();
+                        if (one.getPara() == null) {
+                            currPara = new Para(week, page, 1);
+                        }
+                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        dialog.dismiss();
+                    }
+                });
+                view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        preferenceManager.clearPara(week, page, 1);
+                        one.clearView();
+                        showDeleteMessage();
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Para currPara = two.getPara();
-                if (two.getPara() == null) {
-                    currPara = new Para(1, page, 2);
-                }
-                ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = getActivity().getLayoutInflater().inflate(R.layout.alert_dialog_action_para_pressed, null);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+                view.findViewById(R.id.change).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Para currPara = two.getPara();
+                        if (two.getPara() == null) {
+                            currPara = new Para(week, page, 2);
+                        }
+                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        dialog.dismiss();
+                    }
+                });
+                view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        preferenceManager.clearPara(week, page, 2);
+                        two.clearView();
+                        showDeleteMessage();
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Para currPara = three.getPara();
-                if (three.getPara() == null) {
-                    currPara = new Para(1, page, 3);
-                }
-                ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = getActivity().getLayoutInflater().inflate(R.layout.alert_dialog_action_para_pressed, null);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+                view.findViewById(R.id.change).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Para currPara = three.getPara();
+                        if (three.getPara() == null) {
+                            currPara = new Para(week, page, 3);
+                        }
+                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        dialog.dismiss();
+                    }
+                });
+                view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        preferenceManager.clearPara(week, page, 3);
+                        three.clearView();
+                        showDeleteMessage();
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
             }
         });
         four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Para currPara = four.getPara();
-                if (four.getPara() == null) {
-                    currPara = new Para(1, page, 4);
-                }
-                ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = getActivity().getLayoutInflater().inflate(R.layout.alert_dialog_action_para_pressed, null);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+                view.findViewById(R.id.change).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Para currPara = four.getPara();
+                        if (four.getPara() == null) {
+                            currPara = new Para(week, page, 4);
+                        }
+                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        dialog.dismiss();
+                    }
+                });
+                view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        preferenceManager.clearPara(week, page, 4);
+                        four.clearView();
+                        showDeleteMessage();
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
         five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Para currPara = five.getPara();
-                if (five.getPara() == null) {
-                    currPara = new Para(1, page, 5);
-                }
-                ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = getActivity().getLayoutInflater().inflate(R.layout.alert_dialog_action_para_pressed, null);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+                view.findViewById(R.id.change).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Para currPara = five.getPara();
+                        if (five.getPara() == null) {
+                            currPara = new Para(week, page, 5);
+                        }
+                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        dialog.dismiss();
+                    }
+                });
+                view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        preferenceManager.clearPara(week, page, 5);
+                        five.clearView();
+                        showDeleteMessage();
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
         six.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Para currPara = six.getPara();
-                if (six.getPara() == null) {
-                    currPara = new Para(1, page, 6);
-                }
-                ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
-            }
-        });
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = getActivity().getLayoutInflater().inflate(R.layout.alert_dialog_action_para_pressed, null);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+                view.findViewById(R.id.change).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Para currPara = six.getPara();
+                        if (six.getPara() == null) {
+                            currPara = new Para(week, page, 6);
+                        }
+                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        dialog.dismiss();
+                    }
+                });
+                view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        preferenceManager.clearPara(week, page, 6);
+                        six.clearView();
+                        showDeleteMessage();
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
 
-        //слушатели долгого нажатия на элемент - удаляет запись элемента
-        one.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                preferenceManager.clearPara(1, page, 1);
-                one.clearView();
-                showDeleteMessage();
-                return false;
-            }
-        });
-        two.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                preferenceManager.clearPara(1, page, 2);
-                two.clearView();
-                showDeleteMessage();
-                return false;
-            }
-        });
-        three.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                preferenceManager.clearPara(1, page, 3);
-                three.clearView();
-                showDeleteMessage();
-                return false;
-            }
-        });
-        four.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                preferenceManager.clearPara(1, page, 4);
-                four.clearView();
-                showDeleteMessage();
-                return false;
-            }
-        });
-        five.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                preferenceManager.clearPara(1, page, 5);
-                five.clearView();
-                showDeleteMessage();
-                return false;
-            }
-        });
-        six.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                preferenceManager.clearPara(1, page, 6);
-                six.clearView();
-                showDeleteMessage();
-                return false;
             }
         });
     }

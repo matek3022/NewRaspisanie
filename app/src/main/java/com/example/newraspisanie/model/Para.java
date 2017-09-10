@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by matek on 07.09.2017.
  */
 
-public class Para implements Serializable{
+public class Para implements Serializable {
     private String time;
     private String name;
     private String auditory;
@@ -15,6 +15,7 @@ public class Para implements Serializable{
     private TypePara typePara;
     private int weekDay;
     private int week;
+    private String extended;
 
     public Para() {
     }
@@ -25,7 +26,7 @@ public class Para implements Serializable{
         this.number = number;
     }
 
-    public Para (int number, int weekDay, String name, String auditory, String namePrepod, TypePara typePara) {
+    public Para(int number, int weekDay, String name, String auditory, String namePrepod, TypePara typePara) {
         this.number = number;
         this.weekDay = weekDay;
         this.name = name;
@@ -66,6 +67,10 @@ public class Para implements Serializable{
         return week;
     }
 
+    public String getExtended() {
+        return extended;
+    }
+
     public void setTime(String time) {
         this.time = time;
     }
@@ -89,6 +94,7 @@ public class Para implements Serializable{
     public void setTypePara(TypePara typePara) {
         this.typePara = typePara;
     }
+
     public void setTypePara(int idPara) {
         switch (idPara) {
             case 1:
@@ -111,13 +117,18 @@ public class Para implements Serializable{
         this.week = week;
     }
 
+    public void setExtended(String extended) {
+        this.extended = extended;
+    }
+
     public enum TypePara {
         LEKCIA("Лекция", 1),
         PRACTIC("Практика", 2),
         LABA("Лабораторная", 3);
         private String value;
         private int id;
-        TypePara (String value, int id) {
+
+        TypePara(String value, int id) {
             this.value = value;
             this.id = id;
         }

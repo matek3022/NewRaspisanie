@@ -6,8 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    public PagerAdapter(FragmentManager fm) {
+    private int currWeek;
+    public PagerAdapter(FragmentManager fm, int currWeek) {
         super(fm);
+        this.currWeek = currWeek;
+    }
+
+    public void setCurrWeek(int currWeek) {
+        this.currWeek = currWeek;
     }
 
     public static String getTitle (int position){
@@ -24,6 +30,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = new PageFragment();
         Bundle args = new Bundle();
         args.putInt(PageFragment.ARG_OBJECT, i + 1);
+        args.putInt(PageFragment.ARG_CURR_WEEK, currWeek);
         fragment.setArguments(args);
         return fragment;
     }

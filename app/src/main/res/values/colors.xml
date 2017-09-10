@@ -96,12 +96,13 @@
     <color name="black_alpha_80">#34000000</color>
     <color name="black_alpha_90">#1A000000</color>
 
-    <color name="colorPrimary">#829440c2</color>
+    <color name="colorPrimary">#009440c2</color>
     <color name="colorPrimaryLight">#5efc82</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#d500f9</color>
-    <color name="practicColor">#9Cfcc19d</color>
-    <color name="lekciaColor">#9C6cbaac</color>
-    <color name="labaColor">#9Cb8c7d4</color>
+    <color name="colorAccent">#ffffff</color>
+    <color name="practicColor">#9Ce677a5</color>
+    <color name="lekciaColor">#9C57c3eb</color>
+    <color name="labaColor">#9C6f4894</color>
     <color name="nothingColor">#1Aaaaaaa</color>
+    <color name="textColor">#ffffff</color>
 </resources>

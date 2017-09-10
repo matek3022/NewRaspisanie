@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/default_padding"
     android:paddingStart="@dimen/default_padding"
     android:paddingEnd="@dimen/default_padding"
-    android:textColor="@color/colorPrimaryDark"
+    android:textColor="@color/textColor"
     android:textSize="16sp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

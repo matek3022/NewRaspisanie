@@ -45,6 +45,9 @@ public class RaspItemView extends LinearLayout {
     @BindView(R.id.type)
     TextView type;
 
+    @BindView(R.id.extended)
+    TextView extended;
+
     @BindView(R.id.card_parent)
     CardView cardView;
 
@@ -120,6 +123,7 @@ public class RaspItemView extends LinearLayout {
         name.setText(para.getName());
         auditory.setText(para.getAuditory());
         prepodName.setText(para.getNamePrepod());
+        extended.setText(para.getExtended());
     }
 
     public void clearView() {
@@ -130,6 +134,7 @@ public class RaspItemView extends LinearLayout {
         name.setText("");
         auditory.setText("");
         prepodName.setText("");
+        extended.setText("");
     }
 
     private void init() {

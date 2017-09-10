@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/change"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:paddingLeft="@dimen/default_padding"
+        android:gravity="center|left"
+        android:text="Изменить или добавить"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <TextView
+        android:id="@+id/delete"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:paddingLeft="@dimen/default_padding"
+        android:gravity="center|start"
+        android:text="Удалить"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>
