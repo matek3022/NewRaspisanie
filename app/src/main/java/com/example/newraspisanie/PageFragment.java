@@ -26,7 +26,8 @@ import butterknife.ButterKnife;
 public class PageFragment extends Fragment {
     public static final String ARG_OBJECT = "object";
     public static final String ARG_CURR_WEEK = "curr_week";
-    public static final String RECEIVER_FILTER = "com.example.newraspisanie.filter_receiajgfeasdbg";
+    public static final String PARA_CHANGE_RECEIVER_FILTER = "com.example.newraspisanie.parachange_filter_receiajgfeasdbg";
+    public static final String WEEK_CHANGE_RECEIVER_FILTER = "com.example.newraspisanie.weekchange_filter_receiajgfeasdbg";
     private Para para;
     private int page;
     private int week;
@@ -44,13 +45,21 @@ public class PageFragment extends Fragment {
     RaspItemView five;
     @BindView(R.id.six)
     RaspItemView six;
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private BroadcastReceiver paraChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             para = (Para) intent.getSerializableExtra(ARG_OBJECT);
             if (listener != null) {
                 listener.paraChanged();
             }
+        }
+    };
+
+    private BroadcastReceiver weekChangeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            week = intent.getIntExtra(ARG_OBJECT, week);
+            refreshUI();
         }
     };
 
@@ -61,8 +70,8 @@ public class PageFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         page = getArguments().getInt(ARG_OBJECT);
         week = getArguments().getInt(ARG_CURR_WEEK);
-        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, new IntentFilter(RECEIVER_FILTER + page + "_" + 1));
         preferenceManager = PreferenceManager.getInstance(getContext());
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(weekChangeReceiver, new IntentFilter(WEEK_CHANGE_RECEIVER_FILTER));
         return rootView;
     }
 
@@ -71,17 +80,33 @@ public class PageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initListeners();
         if (para == null) {
-            for (int i = 0; i < 6; i++) {
-                para = preferenceManager.getPara(week, page, i + 1);
-                listener.paraChanged();
-            }
+            refreshUI();
+        }
+    }
+
+    private void refreshUI() {
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(paraChangeReceiver);
+        /**
+         * перерегистриуем ресивер, когда меняется неделя
+         */
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(paraChangeReceiver, new IntentFilter(PARA_CHANGE_RECEIVER_FILTER + page + "_" + week));
+        one.clearView();
+        two.clearView();
+        three.clearView();
+        four.clearView();
+        five.clearView();
+        six.clearView();
+        for (int i = 0; i < 6; i++) {
+            para = preferenceManager.getPara(week, page, i + 1);
+            listener.paraChanged();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(paraChangeReceiver);
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(weekChangeReceiver);
     }
 
     private void initListeners() {
@@ -128,7 +153,7 @@ public class PageFragment extends Fragment {
                         if (one.getPara() == null) {
                             currPara = new Para(week, page, 1);
                         }
-                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        ((SwipeViewActivity) getActivity()).showAddDialog(currPara);
                         dialog.dismiss();
                     }
                 });
@@ -158,7 +183,7 @@ public class PageFragment extends Fragment {
                         if (two.getPara() == null) {
                             currPara = new Para(week, page, 2);
                         }
-                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        ((SwipeViewActivity) getActivity()).showAddDialog(currPara);
                         dialog.dismiss();
                     }
                 });
@@ -188,7 +213,7 @@ public class PageFragment extends Fragment {
                         if (three.getPara() == null) {
                             currPara = new Para(week, page, 3);
                         }
-                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        ((SwipeViewActivity) getActivity()).showAddDialog(currPara);
                         dialog.dismiss();
                     }
                 });
@@ -219,7 +244,7 @@ public class PageFragment extends Fragment {
                         if (four.getPara() == null) {
                             currPara = new Para(week, page, 4);
                         }
-                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        ((SwipeViewActivity) getActivity()).showAddDialog(currPara);
                         dialog.dismiss();
                     }
                 });
@@ -249,7 +274,7 @@ public class PageFragment extends Fragment {
                         if (five.getPara() == null) {
                             currPara = new Para(week, page, 5);
                         }
-                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        ((SwipeViewActivity) getActivity()).showAddDialog(currPara);
                         dialog.dismiss();
                     }
                 });
@@ -279,7 +304,7 @@ public class PageFragment extends Fragment {
                         if (six.getPara() == null) {
                             currPara = new Para(week, page, 6);
                         }
-                        ((SwipeViewActivity)getActivity()).showAddDialog(currPara);
+                        ((SwipeViewActivity) getActivity()).showAddDialog(currPara);
                         dialog.dismiss();
                     }
                 });

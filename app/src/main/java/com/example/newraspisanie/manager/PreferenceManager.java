@@ -18,6 +18,7 @@ public class PreferenceManager {
     public static String DATA_PREF = "com.example.newraspisanie.manager.dataPrefs";
 
     private static final String PARA = "com.example.newraspisanie.manager.para";
+    private static final String DATE = "com.example.newraspisanie.manager.date";
 
     private PreferenceManager(Context context){
         dataPrefs = context.getSharedPreferences(DATA_PREF, Context.MODE_PRIVATE);
@@ -29,6 +30,16 @@ public class PreferenceManager {
             instance = new PreferenceManager(context);
         }
         return instance;
+    }
+
+    public void setFirstDay(long date) {
+        SharedPreferences.Editor editor = dataPrefs.edit();
+        editor.putLong(DATE, date);
+        editor.apply();
+    }
+
+    public long getFirstDay() {
+        return dataPrefs.getLong(DATE, System.currentTimeMillis());
     }
 
     public Para getPara(int numberWeek, int numberDay, int number) {
@@ -44,6 +55,12 @@ public class PreferenceManager {
     public void clearPara(int numberWeek, int numberDay, int number) {
         SharedPreferences.Editor editor = dataPrefs.edit();
         editor.remove(PARA + numberWeek + "_" + numberDay + "_" + number);
+        editor.apply();
+    }
+
+    public void clear() {
+        SharedPreferences.Editor editor = dataPrefs.edit();
+        editor.clear();
         editor.apply();
     }
 }

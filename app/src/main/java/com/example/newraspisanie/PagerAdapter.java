@@ -25,6 +25,18 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         if (position==6) return "Суббота";
         return "";
     }
+
+    public static String getTitle (int position, int week){
+        String res = week == 1 ? "I - " : "II - ";
+        if (position==1) res+= "Понедельник";
+        if (position==2) res+= "Вторник";
+        if (position==3) res+= "Среда";
+        if (position==4) res+= "Четверг";
+        if (position==5) res+= "Пятница";
+        if (position==6) res+= "Суббота";
+        return res;
+    }
+
     @Override
     public Fragment getItem(int i) {
         Fragment fragment = new PageFragment();

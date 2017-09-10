@@ -87,43 +87,46 @@ public class RaspItemView extends LinearLayout {
     }
 
     public void setPara(Para para) {
+        clearView();
         this.para = para;
-        switch (para.getNumber()) {
-            case 1:
-                time.setText(one);
-                break;
-            case 2:
-                time.setText(two);
-                break;
-            case 3:
-                time.setText(three);
-                break;
-            case 4:
-                time.setText(four);
-                break;
-            case 5:
-                time.setText(five);
-                break;
-            case 6:
-                time.setText(six);
-                break;
+        if (para != null) {
+            switch (para.getNumber()) {
+                case 1:
+                    time.setText(one);
+                    break;
+                case 2:
+                    time.setText(two);
+                    break;
+                case 3:
+                    time.setText(three);
+                    break;
+                case 4:
+                    time.setText(four);
+                    break;
+                case 5:
+                    time.setText(five);
+                    break;
+                case 6:
+                    time.setText(six);
+                    break;
+            }
+            type.setText(para.getTypePara().toString());
+            switch (para.getTypePara()) {
+                case LABA:
+                    cardView.setCardBackgroundColor(getResources().getColor(R.color.labaColor));
+                    break;
+                case PRACTIC:
+                    cardView.setCardBackgroundColor(getResources().getColor(R.color.practicColor));
+                    break;
+                case LEKCIA:
+                    cardView.setCardBackgroundColor(getResources().getColor(R.color.lekciaColor));
+                    break;
+            }
+            name.setText(para.getName());
+            auditory.setText(para.getAuditory());
+            prepodName.setText(para.getNamePrepod());
+            extended.setText(para.getExtended());
         }
-        type.setText(para.getTypePara().toString());
-        switch (para.getTypePara()) {
-            case LABA:
-                cardView.setCardBackgroundColor(getResources().getColor(R.color.labaColor));
-                break;
-            case PRACTIC:
-                cardView.setCardBackgroundColor(getResources().getColor(R.color.practicColor));
-                break;
-            case LEKCIA:
-                cardView.setCardBackgroundColor(getResources().getColor(R.color.lekciaColor));
-                break;
-        }
-        name.setText(para.getName());
-        auditory.setText(para.getAuditory());
-        prepodName.setText(para.getNamePrepod());
-        extended.setText(para.getExtended());
     }
 
     public void clearView() {
