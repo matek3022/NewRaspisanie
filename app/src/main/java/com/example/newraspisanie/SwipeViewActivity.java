@@ -128,8 +128,6 @@ public class SwipeViewActivity extends AppCompatActivity {
         mViewPager.setAdapter(mPagerAdapter);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.textColor));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.textColor));
         collapsingToolbarLayout.setTitle("");
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -146,10 +144,6 @@ public class SwipeViewActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-//        PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
-//        pagerTabStrip.setTabIndicatorColor(Color.WHITE);
-//        pagerTabStrip.setTextColor(Color.WHITE);
-
         Date dateCurr = new Date(System.currentTimeMillis());
         SimpleDateFormat hourInDay = new SimpleDateFormat("kk");
         SimpleDateFormat dayOfWeek = new SimpleDateFormat("E");
