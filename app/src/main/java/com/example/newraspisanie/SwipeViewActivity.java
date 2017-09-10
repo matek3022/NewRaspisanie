@@ -218,9 +218,18 @@ public class SwipeViewActivity extends AppCompatActivity {
         view.findViewById(R.id.add_demo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.setDemoList(context);
-                notifyDataChanged();
-                dialog.dismiss();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                builder1.setMessage("Вы действительно хотите поставить шаблон? Текущие данные удалятся безвозвратно");
+                builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Utils.setDemoList(context);
+                        notifyDataChanged();
+                        dialog.dismiss();
+                    }
+                });
+                builder1.setNegativeButton("Нет", null);
+                builder1.show();
             }
         });
         view.findViewById(R.id.clear).setOnClickListener(new View.OnClickListener() {

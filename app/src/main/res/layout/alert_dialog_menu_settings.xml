@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/add_demo"
         android:textSize="14sp"
-        android:text="Добавить демо расписание (гр. 6412)"
+        android:text="Добавить шаблон расписания (гр. 6412)"
         android:textColor="@color/textColor"
         android:padding="@dimen/default_padding"
         android:layout_width="match_parent"
