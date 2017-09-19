@@ -216,8 +216,9 @@ public class SwipeViewActivity extends AppCompatActivity {
         weekInYear.setTimeZone(TimeZone.getDefault());
         int currWeek = Integer.valueOf(weekInYear.format(dateCurr));
         int firstWeek = Integer.valueOf(weekInYear.format(dateFirst));
-        ((TextView)findViewById(R.id.week_counter)).setText("Текущая неделя: " + String.valueOf(currWeek - firstWeek + 1 + (getChangeNextWeek(dayweek, hourday) ? 1 : 0)));
-        return (((currWeek - firstWeek) & 2) == 0) ? (getChangeNextWeek(dayweek, hourday) ? 1 : 2) : (getChangeNextWeek(dayweek, hourday) ? 2 : 1);
+        int numberWeek = currWeek - firstWeek + 1 + (getChangeNextWeek(dayweek, hourday) ? 1 : 0);
+        ((TextView)findViewById(R.id.week_counter)).setText("Текущая неделя: " + String.valueOf(numberWeek));
+        return ((numberWeek % 2 == 0) ? 2 : 1);
     }
 
     private void notifyDataChanged() {

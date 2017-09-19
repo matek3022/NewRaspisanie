@@ -117,7 +117,7 @@ public class Para implements Serializable {
     public enum TypePara {
         LEKCIA("Лекция", 1),
         PRACTIC("Практика", 2),
-        LABA("Лабораторная", 3);
+        LABA("Лаба", 3);
         private String value;
         private int id;
 

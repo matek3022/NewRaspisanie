@@ -10,17 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:hint="Имя преподавателя"
-        android:id="@+id/prepod_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
         android:hint="Номер аудитории"
         android:id="@+id/auditory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:hint="Дополнительное поле"
+        android:hint="Дополнительное поле 1"
+        android:id="@+id/prepod_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Дополнительное поле 2"
         android:id="@+id/extended"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
