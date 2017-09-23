@@ -1,6 +1,8 @@
 package com.example.newraspisanie;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.example.newraspisanie.manager.PreferenceManager;
 import com.example.newraspisanie.model.Para;
@@ -98,4 +100,269 @@ public class Utils {
         manager.clearPara(2,6,5);
         manager.clearPara(2,6,6);
     }
+
+    public static ViewPager.PageTransformer getTransformer(int index) {
+        switch (index) {
+            case 1:
+                return null;
+            case 2:
+                return new ZoomOutAndRotatePageTransformer();
+            case 3:
+                return new ZoomOutPageTransformer();
+            case 4:
+                return new ZoomOutItemsPageTransformer();
+            case 5:
+                return new DevilYPageTransformer();
+            case 6:
+                return new DevilXPageTransformer();
+            case 7:
+                return new DevilPageTransformer();
+            case 8:
+                return new DevilItemPageTransformer();
+            default:
+                return null;
+        }
+    }
+
+    public static class ZoomOutAndRotatePageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.7f;
+        private static final float MIN_ALPHA = 0.5f;
+
+        public void transformPage(View view, float position) {
+            if (view != null) {
+                int pageWidth = view.getWidth();
+                int pageHeight = view.getHeight();
+                if (position < -1) {
+                    view.setAlpha(0);
+                } else if (position <= 1) {
+                    float scaleFactor;
+                    scaleFactor = MIN_SCALE + ((1 - MIN_SCALE) / 0.4f) * (0.4f - Math.abs(position));
+                    // Fade the page relative to its size.
+                    view.setAlpha(MIN_ALPHA + ((1 - MIN_ALPHA) / 0.4f) * (0.4f - Math.abs(position)));
+                    view.setRotationY(position * 60);
+                    float vertMargin = pageHeight * (1 - scaleFactor) / 2;
+                    float horzMargin = pageWidth * (1 - scaleFactor) / 2;
+                    if (position < 0) {
+                        view.setTranslationX(horzMargin - vertMargin / 2);
+                    } else {
+                        view.setTranslationX(-horzMargin + vertMargin / 2);
+                    }
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+                } else {
+                    view.setAlpha(0);
+                }
+            }
+        }
+    }
+
+    public static class ZoomOutPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.7f;
+        private static final float MIN_ALPHA = 0.5f;
+
+        public void transformPage(View view, float position) {
+            if (view != null) {
+                int pageWidth = view.getWidth();
+                int pageHeight = view.getHeight();
+                if (position < -1) {
+                    view.setAlpha(0);
+                } else if (position <= 1) {
+                    float scaleFactor;
+                    scaleFactor = MIN_SCALE + ((1 - MIN_SCALE) / 0.4f) * (0.4f - Math.abs(position));
+                    // Fade the page relative to its size.
+                    view.setAlpha(MIN_ALPHA + ((1 - MIN_ALPHA) / 0.4f) * (0.4f - Math.abs(position)));
+                    float vertMargin = pageHeight * (1 - scaleFactor) / 2;
+                    float horzMargin = pageWidth * (1 - scaleFactor) / 2;
+                    if (position < 0) {
+                        view.setTranslationX(horzMargin - vertMargin / 2);
+                    } else {
+                        view.setTranslationX(-horzMargin + vertMargin / 2);
+                    }
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+                } else {
+                    view.setAlpha(0);
+                }
+            }
+        }
+    }
+
+    public static class ZoomOutItemsPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.7f;
+        private static final float MIN_ALPHA = 0.5f;
+
+        public void transformPage(View view, float position) {
+            transformElement(view.findViewById(R.id.one), position);
+            transformElement(view.findViewById(R.id.two), position);
+            transformElement(view.findViewById(R.id.three), position);
+            transformElement(view.findViewById(R.id.four), position);
+            transformElement(view.findViewById(R.id.five), position);
+            transformElement(view.findViewById(R.id.six), position);
+        }
+        private void transformElement(View view1, float position) {
+            if (view1 != null) {
+                int pageWidth = view1.getWidth();
+                int pageHeight = view1.getHeight();
+                if (position < -1) {
+                    view1.setAlpha(0);
+                } else if (position <= 1) {
+                    float scaleFactor;
+                    scaleFactor = MIN_SCALE + ((1 - MIN_SCALE) / 0.4f) * (0.4f - Math.abs(position));
+                    // Fade the page relative to its size.
+                    view1.setAlpha(MIN_ALPHA + ((1 - MIN_ALPHA) / 0.4f) * (0.4f - Math.abs(position)));
+                    float vertMargin = pageHeight * (1 - scaleFactor) / 2;
+                    float horzMargin = pageWidth * (1 - scaleFactor) / 2;
+                    if (position < 0) {
+                        view1.setTranslationX(horzMargin - vertMargin / 2);
+                    } else {
+                        view1.setTranslationX(-horzMargin + vertMargin / 2);
+                    }
+                    view1.setScaleX(scaleFactor);
+                    view1.setScaleY(scaleFactor);
+                } else {
+                    view1.setAlpha(0);
+                }
+            }
+        }
+    }
+
+    public static class DevilYPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.85f;
+        private static final float MIN_ALPHA = 0.5f;
+
+        public void transformPage(View view, float position) {
+            if (view != null) {
+                int pageWidth = view.getWidth();
+                int pageHeight = view.getHeight();
+                if (position < -1) {
+                    view.setAlpha(0);
+                } else if (position <= 1) {
+                    float scaleFactor;
+                    scaleFactor = MIN_SCALE + ((1 - MIN_SCALE) / 0.4f) * (0.4f - Math.abs(position));
+                    // Fade the page relative to its size.
+                    view.setAlpha(MIN_ALPHA + ((1 - MIN_ALPHA) / 0.4f) * (0.4f - Math.abs(position)));
+                    view.setRotationY(position * 180);
+                    float vertMargin = pageHeight * (1 - scaleFactor) / 2;
+                    float horzMargin = pageWidth * (1 - scaleFactor) / 2;
+                    if (position < 0) {
+                        view.setTranslationX(horzMargin - vertMargin / 2);
+                    } else {
+                        view.setTranslationX(-horzMargin + vertMargin / 2);
+                    }
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+                } else {
+                    view.setAlpha(0);
+                }
+            }
+        }
+    }
+
+    public static class DevilXPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.85f;
+        private static final float MIN_ALPHA = 0.5f;
+
+        public void transformPage(View view, float position) {
+            if (view != null) {
+                int pageWidth = view.getWidth();
+                int pageHeight = view.getHeight();
+                if (position < -1) {
+                    view.setAlpha(0);
+                } else if (position <= 1) {
+                    float scaleFactor;
+                    scaleFactor = MIN_SCALE + ((1 - MIN_SCALE) / 0.4f) * (0.4f - Math.abs(position));
+                    // Fade the page relative to its size.
+                    view.setAlpha(MIN_ALPHA + ((1 - MIN_ALPHA) / 0.4f) * (0.4f - Math.abs(position)));
+                    view.setRotationX(position * 180);
+                    float vertMargin = pageHeight * (1 - scaleFactor) / 2;
+                    float horzMargin = pageWidth * (1 - scaleFactor) / 2;
+                    if (position < 0) {
+                        view.setTranslationX(horzMargin - vertMargin / 2);
+                    } else {
+                        view.setTranslationX(-horzMargin + vertMargin / 2);
+                    }
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+                } else {
+                    view.setAlpha(0);
+                }
+            }
+        }
+    }
+
+    public static class DevilPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.85f;
+        private static final float MIN_ALPHA = 0.3f;
+
+        public void transformPage(View view, float position) {
+            if (view != null) {
+                int pageWidth = view.getWidth();
+                int pageHeight = view.getHeight();
+                if (position < -1) {
+                    view.setAlpha(0);
+                } else if (position <= 1) {
+                    float scaleFactor;
+                    scaleFactor = MIN_SCALE + ((1 - MIN_SCALE) / 0.4f) * (0.4f - Math.abs(position));
+                    // Fade the page relative to its size.
+                    view.setAlpha(MIN_ALPHA + ((1 - MIN_ALPHA) / 0.4f) * (0.4f - Math.abs(position)));
+                    view.setRotationX(position * 180);
+                    view.setRotationY(position * 180);
+                    float vertMargin = pageHeight * (1 - scaleFactor) / 2;
+                    float horzMargin = pageWidth * (1 - scaleFactor) / 2;
+                    if (position < 0) {
+                        view.setTranslationX(horzMargin - vertMargin / 2);
+                    } else {
+                        view.setTranslationX(-horzMargin + vertMargin / 2);
+                    }
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+                } else {
+                    view.setAlpha(0);
+                }
+            }
+        }
+    }
+
+    public static class DevilItemPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.3f;
+        private static final float MIN_ALPHA = 0.3f;
+
+        public void transformPage(View view, float position) {
+            transformElement(view.findViewById(R.id.one), position);
+            transformElement(view.findViewById(R.id.two), position);
+            transformElement(view.findViewById(R.id.three), position);
+            transformElement(view.findViewById(R.id.four), position);
+            transformElement(view.findViewById(R.id.five), position);
+            transformElement(view.findViewById(R.id.six), position);
+        }
+
+        private void transformElement(View view, float position) {
+            if (view != null) {
+                int pageWidth = view.getWidth();
+                int pageHeight = view.getHeight();
+                if (position < -1) {
+                    view.setAlpha(0);
+                } else if (position <= 1) {
+                    float scaleFactor;
+                    scaleFactor = MIN_SCALE + ((1 - MIN_SCALE) / 0.4f) * (0.4f - Math.abs(position));
+                    // Fade the page relative to its size.
+                    view.setAlpha(MIN_ALPHA + ((1 - MIN_ALPHA) / 0.4f) * (0.4f - Math.abs(position)));
+                    view.setRotationX(position * 180);
+                    view.setRotationY(position * 180);
+                    float vertMargin = pageHeight * (1 - scaleFactor) / 2;
+                    float horzMargin = pageWidth * (1 - scaleFactor) / 2;
+                    if (position < 0) {
+                        view.setTranslationX(horzMargin - vertMargin / 2);
+                    } else {
+                        view.setTranslationX(-horzMargin + vertMargin / 2);
+                    }
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+                } else {
+                    view.setAlpha(0);
+                }
+            }
+        }
+    }
+
 }

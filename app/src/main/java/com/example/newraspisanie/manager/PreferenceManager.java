@@ -19,6 +19,7 @@ public class PreferenceManager {
 
     private static final String PARA = "com.example.newraspisanie.manager.para";
     private static final String DATE = "com.example.newraspisanie.manager.date";
+    private static final String ANIMATION = "com.example.newraspisanie.manager.animation";
 
     private PreferenceManager(Context context){
         dataPrefs = context.getSharedPreferences(DATA_PREF, Context.MODE_PRIVATE);
@@ -50,6 +51,16 @@ public class PreferenceManager {
         SharedPreferences.Editor editor = dataPrefs.edit();
         editor.putString(PARA + para.getWeek() + "_" + para.getWeekDay() + "_" + para.getNumber(), gson.toJson(para));
         editor.apply();
+    }
+
+    public void setAnimation(int index) {
+        SharedPreferences.Editor editor = dataPrefs.edit();
+        editor.putInt(ANIMATION, index);
+        editor.apply();
+    }
+
+    public int getAnimation() {
+        return dataPrefs.getInt(ANIMATION, 1);
     }
 
     public void clearPara(int numberWeek, int numberDay, int number) {

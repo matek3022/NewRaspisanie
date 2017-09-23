@@ -46,6 +46,8 @@ public class SwipeViewActivity extends AppCompatActivity {
     private final ArrayList<DictionaryItem> weekDayList = new ArrayList<>();
     private final ArrayList<DictionaryItem> typeList = new ArrayList<>();
 
+    private final ArrayList<DictionaryItem> animationList = new ArrayList<>();
+
     public int getNumberWindow(String dayweek, String hourday) {
         int hour = Integer.parseInt(hourday);
         switch (dayweek) {
@@ -177,6 +179,7 @@ public class SwipeViewActivity extends AppCompatActivity {
         });
 
         Log.wtf("day_format", time_dayOfWeek + " " + time_hourInDay);
+        mViewPager.setPageTransformer(true, Utils.getTransformer(PreferenceManager.getInstance(context).getAnimation()));
         mViewPager.setCurrentItem(getNumberWindow(time_dayOfWeek, time_hourInDay));
         context = this;
     }
@@ -217,7 +220,7 @@ public class SwipeViewActivity extends AppCompatActivity {
         int currWeek = Integer.valueOf(weekInYear.format(dateCurr));
         int firstWeek = Integer.valueOf(weekInYear.format(dateFirst));
         int numberWeek = currWeek - firstWeek + 1 + (getChangeNextWeek(dayweek, hourday) ? 1 : 0);
-        ((TextView)findViewById(R.id.week_counter)).setText("Текущая неделя: " + String.valueOf(numberWeek));
+        ((TextView) findViewById(R.id.week_counter)).setText("Текущая неделя: " + String.valueOf(numberWeek));
         return ((numberWeek % 2 == 0) ? 2 : 1);
     }
 
@@ -234,6 +237,24 @@ public class SwipeViewActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View view = getLayoutInflater().inflate(R.layout.alert_dialog_menu_settings, null);
         builder.setView(view);
+        DictionaryView animationSelector = (DictionaryView) view.findViewById(R.id.animation);
+        animationSelector.setTitle("Анимация перелистывания");
+        animationSelector.setTitleVisible();
+        animationSelector.setData(animationList);
+        animationSelector.setSelected(PreferenceManager.getInstance(context).getAnimation());
+        animationSelector.setOnDictionarySelectedListener(new DictionaryView.OnDictionarySelectedListener() {
+            @Override
+            public void selected(DictionaryItem dictionaryItem) {
+                PreferenceManager.getInstance(context).setAnimation(dictionaryItem.getId());
+                mViewPager.setPageTransformer(true, Utils.getTransformer(dictionaryItem.getId()));
+                notifyDataChanged();
+            }
+
+            @Override
+            public void nothingSelected() {
+
+            }
+        });
         final AlertDialog dialog = builder.create();
         view.findViewById(R.id.add_demo).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,6 +344,15 @@ public class SwipeViewActivity extends AppCompatActivity {
         typeList.add(new DictionaryItem(1, "Лекция"));
         typeList.add(new DictionaryItem(2, "Практика"));
         typeList.add(new DictionaryItem(3, "Лабораторная"));
+
+        animationList.add(new DictionaryItem(1, "Стандартная"));
+        animationList.add(new DictionaryItem(2, "Уменьшение с поворотом"));
+        animationList.add(new DictionaryItem(3, "Уменьшение"));
+        animationList.add(new DictionaryItem(4, "Уменьшение элемента"));
+        animationList.add(new DictionaryItem(5, "Адская вертикаль"));
+        animationList.add(new DictionaryItem(6, "Адская горизонталь"));
+        animationList.add(new DictionaryItem(7, "Адская"));
+        animationList.add(new DictionaryItem(8, "Адская поэлементная"));
     }
 
     public void showAddDialog(Para para) {
