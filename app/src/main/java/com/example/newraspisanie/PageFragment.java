@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.newraspisanie.manager.PreferenceManager;
 import com.example.newraspisanie.model.Para;
@@ -382,8 +381,13 @@ public class PageFragment extends Fragment {
         });
     }
 
+    private void showMessage(String text) {
+        ((SwipeViewActivity) getActivity()).showShackMessage(text);
+    }
+
     private void showDeleteMessage() {
-        Toast.makeText(getContext(), "Вы удалили пару", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Вы удалили пару", Toast.LENGTH_SHORT).show();
+        showMessage("Пара удалена");
     }
 
     interface Listener {

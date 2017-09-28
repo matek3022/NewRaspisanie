@@ -11,7 +11,7 @@ public class Para implements Serializable {
     private String auditory;
     private int number;
     private String namePrepod;
-    private TypePara typePara;
+    private TypePara typePara = null;
     private int weekDay;
     private int week;
     private String extended;
@@ -99,6 +99,8 @@ public class Para implements Serializable {
             case 3:
                 typePara = TypePara.LABA;
                 break;
+            default:
+                typePara = null;
         }
     }
 

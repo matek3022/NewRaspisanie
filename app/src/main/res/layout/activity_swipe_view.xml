@@ -1,90 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@mipmap/background"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
+        android:background="@mipmap/background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/week_counter"
-        android:fitsSystemWindows="false">
-
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
-            android:background="#00000000"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:fitsSystemWindows="false"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginRight="100dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingLeft="24dp"
+                android:singleLine="true"
+                android:text="Title text asdasdasdasdasdasasdasd"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                app:layout_collapseMode="parallax" />
 
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapse_toolbar"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fitsSystemWindows="false"
-                app:collapsedTitleGravity="bottom"
-                app:expandedTitleGravity="bottom"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:title="asdasd">
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="100dp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:paddingLeft="24dp"
-                    android:singleLine="true"
-                    android:text="Title text asdasdasdasdasdasasdasd"
-                    android:textColor="@color/textColor"
-                    android:textSize="25sp"
-                    app:layout_collapseMode="parallax" />
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
-                    app:layout_collapseMode="parallax"
-                    app:titleTextColor="@color/textColor" />
-
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_gravity="bottom"
+                app:layout_collapseMode="parallax"
+                app:titleTextColor="@color/textColor" />
+        </RelativeLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_below="@+id/toolbar_container"
+            android:layout_above="@+id/week_counter"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:text="Текущая неделя: 123"
+            android:id="@+id/week_counter"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="600dp"
-                    tools:layout="@layout/fragment">
-
-                </android.support.v4.view.ViewPager>
-            </LinearLayout>
-
-
-        </android.support.v4.widget.NestedScrollView>
-
-    </android.support.design.widget.CoordinatorLayout>
-    <TextView
-        android:layout_alignParentBottom="true"
-        android:text="Текущая неделя: 123"
-        android:id="@+id/week_counter"
-        android:gravity="center"
-        android:textSize="14sp"
-        android:textColor="@color/textColor"
-        android:layout_width="match_parent"
-        android:layout_height="32dp" />
-</RelativeLayout>

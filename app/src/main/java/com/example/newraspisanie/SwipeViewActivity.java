@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -18,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.newraspisanie.manager.PreferenceManager;
 import com.example.newraspisanie.model.DictionaryItem;
@@ -160,8 +160,9 @@ public class SwipeViewActivity extends AppCompatActivity {
         toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mViewPager.setAdapter(mPagerAdapter);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
-        collapsingToolbarLayout.setTitle("");
+        getSupportActionBar().setTitle("");
+//        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
+//        collapsingToolbarLayout.setTitle("");
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -200,9 +201,11 @@ public class SwipeViewActivity extends AppCompatActivity {
                 switch (currWeek) {
                     case 1:
                         currWeek = 2;
+                        showShackMessage("Четная неделя");
                         break;
                     case 2:
                         currWeek = 1;
+                        showShackMessage("Нечетная неделя");
                         break;
                 }
                 notifyDataChanged();
@@ -266,6 +269,7 @@ public class SwipeViewActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Utils.set6412List(context);
                         notifyDataChanged();
+                        showShackMessage("Шаблон установлен");
                         dialog.dismiss();
                     }
                 });
@@ -283,6 +287,7 @@ public class SwipeViewActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PreferenceManager.getInstance(context).clear();
                         notifyDataChanged();
+                        showShackMessage("Данные стерты");
                         dialog.dismiss();
                     }
                 });
@@ -341,6 +346,7 @@ public class SwipeViewActivity extends AppCompatActivity {
         weekList.add(new DictionaryItem(1, "Нечетная неделя"));
         weekList.add(new DictionaryItem(2, "Четная неделя"));
 
+        typeList.add(new DictionaryItem(4, "Другое"));
         typeList.add(new DictionaryItem(1, "Лекция"));
         typeList.add(new DictionaryItem(2, "Практика"));
         typeList.add(new DictionaryItem(3, "Лабораторная"));
@@ -409,10 +415,23 @@ public class SwipeViewActivity extends AppCompatActivity {
                 para.setTypePara(type.getSelected().getId());
                 if (number.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT
                         || numberDay.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT
-                        || numberWeek.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT
-                        || type.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT) {
+                        || numberWeek.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT) {
                     showAddDialog(para);
-                    Toast.makeText(context, "Пустые параметры: неделя/день недели/номер пары/тип пары", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, "Пустые параметры: неделя/день недели/номер пары", Toast.LENGTH_LONG).show();
+                    String snackText = "";
+                    if (number.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT) {
+                        snackText += "номер пары";
+                    }
+                    if (numberDay.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT) {
+                        if (!TextUtils.isEmpty(snackText)) snackText += ", ";
+                        snackText += "день недели";
+                    }
+                    if (numberWeek.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT) {
+                        if (!TextUtils.isEmpty(snackText)) snackText += ", ";
+                        snackText += "неделя";
+                    }
+                    Snackbar.make(SwipeViewActivity.this.findViewById(R.id.root), "Пустые параметры: " + snackText, Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 } else {
                     Intent intent = new Intent(PageFragment.PARA_CHANGE_RECEIVER_FILTER + numberDay.getSelected().getId() + "_" + numberWeek.getSelected().getId());
                     PreferenceManager.getInstance(context).setPara(para);
@@ -427,6 +446,11 @@ public class SwipeViewActivity extends AppCompatActivity {
 
     public void showAddDialog() {
         showAddDialog(null);
+    }
+
+    public void showShackMessage(String text) {
+        Snackbar.make(SwipeViewActivity.this.findViewById(R.id.root), text, Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
     }
 
 }

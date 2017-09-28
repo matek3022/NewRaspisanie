@@ -103,6 +103,7 @@
     <color name="practicColor">#9Ce677a5</color>
     <color name="lekciaColor">#9C57c3eb</color>
     <color name="labaColor">#9C6f4894</color>
+    <color name="otherColor">#9C999999</color>
     <color name="nothingColor">#1Aaaaaaa</color>
     <color name="textColor">#ffffff</color>
 </resources>

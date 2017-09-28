@@ -110,17 +110,23 @@ public class RaspItemView extends LinearLayout {
                     time.setText(six);
                     break;
             }
-            type.setText(para.getTypePara().toString());
-            switch (para.getTypePara()) {
-                case LABA:
-                    cardView.setCardBackgroundColor(getResources().getColor(R.color.labaColor));
-                    break;
-                case PRACTIC:
-                    cardView.setCardBackgroundColor(getResources().getColor(R.color.practicColor));
-                    break;
-                case LEKCIA:
-                    cardView.setCardBackgroundColor(getResources().getColor(R.color.lekciaColor));
-                    break;
+            type.setText(para.getTypePara() != null ? para.getTypePara().toString() : "Другое");
+            if (para.getTypePara() != null) {
+                switch (para.getTypePara()) {
+                    case LABA:
+                        cardView.setCardBackgroundColor(getResources().getColor(R.color.labaColor));
+                        break;
+                    case PRACTIC:
+                        cardView.setCardBackgroundColor(getResources().getColor(R.color.practicColor));
+                        break;
+                    case LEKCIA:
+                        cardView.setCardBackgroundColor(getResources().getColor(R.color.lekciaColor));
+                        break;
+                    default:
+                        cardView.setCardBackgroundColor(getResources().getColor(R.color.otherColor));
+                }
+            } else {
+                cardView.setCardBackgroundColor(getResources().getColor(R.color.otherColor));
             }
             name.setText(para.getName());
             auditory.setText(para.getAuditory());
