@@ -106,4 +106,7 @@
     <color name="otherColor">#9C999999</color>
     <color name="nothingColor">#1Aaaaaaa</color>
     <color name="textColor">#ffffff</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="selected">#707070</color>
 </resources>

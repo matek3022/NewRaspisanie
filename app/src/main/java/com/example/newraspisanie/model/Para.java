@@ -15,6 +15,7 @@ public class Para implements Serializable {
     private int weekDay;
     private int week;
     private String extended;
+    private String time;
 
     public Para() {
     }
@@ -25,7 +26,7 @@ public class Para implements Serializable {
         this.number = number;
     }
 
-    public Para(int week, int weekDay, int number, String name, String namePrepod, String auditory, TypePara typePara, String extended) {
+    public Para(int week, int weekDay, int number, String name, String namePrepod, String auditory, TypePara typePara, String extended, String time) {
         this.number = number;
         this.weekDay = weekDay;
         this.week = week;
@@ -34,6 +35,7 @@ public class Para implements Serializable {
         this.namePrepod = namePrepod;
         this.typePara = typePara;
         this.extended = extended;
+        this.time = time;
     }
 
     public String getName() {
@@ -66,6 +68,10 @@ public class Para implements Serializable {
 
     public String getExtended() {
         return extended;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public void setName(String name) {
@@ -114,6 +120,10 @@ public class Para implements Serializable {
 
     public void setExtended(String extended) {
         this.extended = extended;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public enum TypePara {

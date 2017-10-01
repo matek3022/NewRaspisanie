@@ -5,23 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <EditText
+        style="@style/ShapedEditText"
         android:hint="Название пары"
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
+        style="@style/ShapedEditText"
+        android:layout_marginTop="8dp"
         android:hint="Номер аудитории"
         android:id="@+id/auditory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
+        style="@style/ShapedEditText"
+        android:layout_marginTop="8dp"
+
         android:hint="Дополнительное поле 1"
         android:id="@+id/prepod_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
+        style="@style/ShapedEditText"
+        android:layout_marginTop="8dp"
         android:hint="Дополнительное поле 2"
         android:id="@+id/extended"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        style="@style/ShapedEditText"
+        android:layout_marginTop="8dp"
+        android:hint="Кастомное время"
+        android:inputType="date|time"
+        android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <com.example.newraspisanie.view.DictionaryView

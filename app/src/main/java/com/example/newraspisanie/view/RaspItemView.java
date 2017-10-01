@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.newraspisanie.R;
+import com.example.newraspisanie.manager.PreferenceManager;
 import com.example.newraspisanie.model.Para;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,24 +94,26 @@ public class RaspItemView extends LinearLayout {
         clearView();
         this.para = para;
         if (para != null) {
+            boolean customTime = PreferenceManager.getInstance(getContext()).isCustomTime();
+            List<String> customTimeList = PreferenceManager.getInstance(getContext()).getTime();
             switch (para.getNumber()) {
                 case 1:
-                    time.setText(one);
+                    time.setText(!TextUtils.isEmpty(para.getTime()) ? para.getTime() : customTime ? customTimeList.get(0) : one);
                     break;
                 case 2:
-                    time.setText(two);
+                    time.setText(!TextUtils.isEmpty(para.getTime()) ? para.getTime() : customTime ? customTimeList.get(1) : two);
                     break;
                 case 3:
-                    time.setText(three);
+                    time.setText(!TextUtils.isEmpty(para.getTime()) ? para.getTime() : customTime ? customTimeList.get(2) : three);
                     break;
                 case 4:
-                    time.setText(four);
+                    time.setText(!TextUtils.isEmpty(para.getTime()) ? para.getTime() : customTime ? customTimeList.get(3) : four);
                     break;
                 case 5:
-                    time.setText(five);
+                    time.setText(!TextUtils.isEmpty(para.getTime()) ? para.getTime() : customTime ? customTimeList.get(4) : five);
                     break;
                 case 6:
-                    time.setText(six);
+                    time.setText(!TextUtils.isEmpty(para.getTime()) ? para.getTime() : customTime ? customTimeList.get(5) : six);
                     break;
             }
             type.setText(para.getTypePara() != null ? para.getTypePara().toString() : "Другое");
@@ -133,6 +139,11 @@ public class RaspItemView extends LinearLayout {
             prepodName.setText(para.getNamePrepod());
             extended.setText(para.getExtended());
         }
+    }
+
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener l) {
+        cardView.setOnClickListener(l);
     }
 
     public void clearView() {

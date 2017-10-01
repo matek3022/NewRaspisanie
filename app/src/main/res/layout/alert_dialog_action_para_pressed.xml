@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/change"
-        android:textColor="@color/textColor"
-        android:textSize="14sp"
-        android:paddingLeft="@dimen/default_padding"
-        android:gravity="center|left"
-        android:text="Изменить или добавить"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:background="@drawable/dialog_item_selector"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/default_padding"
+        android:text="Изменить или добавить"
+        android:textColor="@color/textColor"
+        android:textSize="14sp" />
+
     <TextView
         android:id="@+id/delete"
-        android:textColor="@color/textColor"
-        android:textSize="14sp"
-        android:paddingLeft="@dimen/default_padding"
-        android:gravity="center|start"
-        android:text="Удалить"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:background="@drawable/dialog_item_selector"
+        android:gravity="center|start"
+        android:paddingLeft="@dimen/default_padding"
+        android:text="Удалить"
+        android:textColor="@color/textColor"
+        android:textSize="14sp" />
 </LinearLayout>

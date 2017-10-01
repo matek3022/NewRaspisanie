@@ -1,55 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <com.example.newraspisanie.view.DictionaryView
-        android:padding="@dimen/default_padding"
         android:id="@+id/animation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding" />
+
+    <Switch
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="Задать шаблон времён"
+        android:textColor="@color/textColor"
+        android:textSize="14sp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:text="Первый учебный день: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/first_date"
+            android:paddingBottom="@dimen/default_padding"
             android:paddingLeft="@dimen/default_padding"
             android:paddingTop="@dimen/default_padding"
-            android:paddingBottom="@dimen/default_padding"
-            android:textSize="14sp"
+            android:text="Первый учебный день: "
             android:textColor="@color/textColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/first_date"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="italic"
-            android:textColor="@color/textColor"
-            android:paddingRight="@dimen/default_padding"
-            android:paddingTop="@dimen/default_padding"
-            android:paddingBottom="@dimen/default_padding"
-            android:text="01.01.1999"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/dialog_item_selector"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="01.01.1999"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            android:textStyle="italic" />
     </RelativeLayout>
+
     <TextView
         android:id="@+id/add_demo"
-        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_item_selector"
+        android:padding="@dimen/default_padding"
         android:text="Добавить шаблон расписания (гр. 6412)"
         android:textColor="@color/textColor"
-        android:padding="@dimen/default_padding"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textSize="14sp" />
+
     <TextView
         android:id="@+id/clear"
-        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_item_selector"
+        android:padding="@dimen/default_padding"
         android:text="Удалить все"
         android:textColor="@color/textColor"
-        android:padding="@dimen/default_padding"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textSize="14sp" />
 </LinearLayout>

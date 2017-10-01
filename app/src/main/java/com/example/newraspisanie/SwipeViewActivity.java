@@ -10,6 +10,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -17,9 +19,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.newraspisanie.adapter.TimeListAdapter;
 import com.example.newraspisanie.manager.PreferenceManager;
 import com.example.newraspisanie.model.DictionaryItem;
 import com.example.newraspisanie.model.Para;
@@ -161,8 +167,6 @@ public class SwipeViewActivity extends AppCompatActivity {
         mViewPager.setAdapter(mPagerAdapter);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setTitle("");
-//        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
-//        collapsingToolbarLayout.setTitle("");
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -262,9 +266,7 @@ public class SwipeViewActivity extends AppCompatActivity {
         view.findViewById(R.id.add_demo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                builder1.setMessage("Вы действительно хотите поставить шаблон? Текущие данные удалятся безвозвратно");
-                builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                GuiUtils.displayYesAndNotMessage(context, "Вы действительно хотите поставить шаблон? Текущие данные удалятся безвозвратно", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Utils.set6412List(context);
@@ -272,17 +274,13 @@ public class SwipeViewActivity extends AppCompatActivity {
                         showShackMessage("Шаблон установлен");
                         dialog.dismiss();
                     }
-                });
-                builder1.setNegativeButton("Нет", null);
-                builder1.show();
+                }, null);
             }
         });
         view.findViewById(R.id.clear).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                builder1.setMessage("Вы действительно хотите удалить расписание?");
-                builder1.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                GuiUtils.displayYesAndNotMessage(context, "Вы действительно хотите удалить расписание?", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PreferenceManager.getInstance(context).clear();
@@ -290,9 +288,20 @@ public class SwipeViewActivity extends AppCompatActivity {
                         showShackMessage("Данные стерты");
                         dialog.dismiss();
                     }
-                });
-                builder1.setNegativeButton("Нет", null);
-                builder1.show();
+                }, null);
+            }
+        });
+        ((Switch)view.findViewById(R.id.time)).setChecked(PreferenceManager.getInstance(context).isCustomTime());
+        ((Switch)view.findViewById(R.id.time)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    showTimeChanger();
+                    dialog.dismiss();
+                } else {
+                    notifyDataChanged();
+                }
+                PreferenceManager.getInstance(context).setCustomTime(b);
             }
         });
         final TextView date = (TextView) view.findViewById(R.id.first_date);
@@ -319,6 +328,32 @@ public class SwipeViewActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    //установка кастомного времени пар
+    private void showTimeChanger() {
+        AlertDialog builder = new AlertDialog.Builder(context).create();
+        View v = getLayoutInflater().inflate(R.layout.alert_dialog_times_settings, null);
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.rv_times);
+        final TimeListAdapter adapter = new TimeListAdapter(PreferenceManager.getInstance(context).getTime());
+        LinearLayoutManager ll = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(ll);
+        recyclerView.setAdapter(adapter);
+        builder.setView(v);
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                PreferenceManager.getInstance(context).setTime(adapter.getList());
+                notifyDataChanged();
+                startSettingsDialog();
+            }
+        });
+        builder.show();
+        try {
+            builder.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE| WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            builder.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        } catch (Exception ignored){}
+
     }
 
     // установка начальных даты и времени
@@ -363,12 +398,13 @@ public class SwipeViewActivity extends AppCompatActivity {
 
     public void showAddDialog(Para para) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        final View innerView = ((SwipeViewActivity) context).getLayoutInflater().inflate(R.layout.layout_add, null);
+        final View innerView = ((SwipeViewActivity) context).getLayoutInflater().inflate(R.layout.alert_dialog_add, null);
         builder.setView(innerView);
         final TextView name = (TextView) innerView.findViewById(R.id.name);
         final TextView auditory = (TextView) innerView.findViewById(R.id.auditory);
         final TextView prepodName = (TextView) innerView.findViewById(R.id.prepod_name);
         final TextView extended = (TextView) innerView.findViewById(R.id.extended);
+        final TextView time = (TextView) innerView.findViewById(R.id.time);
 
         final DictionaryView number = (DictionaryView) innerView.findViewById(R.id.number);
         final DictionaryView numberDay = (DictionaryView) innerView.findViewById(R.id.week_day);
@@ -395,6 +431,7 @@ public class SwipeViewActivity extends AppCompatActivity {
             auditory.setText(para.getAuditory());
             prepodName.setText(para.getNamePrepod());
             extended.setText(para.getExtended());
+            time.setText(para.getTime());
             number.setSelected(para.getNumber());
             numberDay.setSelected(para.getWeekDay());
             numberWeek.setSelected(para.getWeek());
@@ -409,6 +446,7 @@ public class SwipeViewActivity extends AppCompatActivity {
                 para.setName(name.getText().toString());
                 para.setNamePrepod(prepodName.getText().toString());
                 para.setExtended(extended.getText().toString());
+                para.setTime(time.getText().toString());
                 para.setNumber(number.getSelected().getId());
                 para.setWeek(numberWeek.getSelected().getId());
                 para.setWeekDay(numberDay.getSelected().getId());
@@ -417,7 +455,6 @@ public class SwipeViewActivity extends AppCompatActivity {
                         || numberDay.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT
                         || numberWeek.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT) {
                     showAddDialog(para);
-//                    Toast.makeText(context, "Пустые параметры: неделя/день недели/номер пары", Toast.LENGTH_LONG).show();
                     String snackText = "";
                     if (number.getSelected().getId() == DictionaryView.FIRST_NOTHING_ELEMENT) {
                         snackText += "номер пары";
