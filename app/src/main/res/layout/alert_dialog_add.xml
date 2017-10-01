@@ -36,7 +36,6 @@
         style="@style/ShapedEditText"
         android:layout_marginTop="8dp"
         android:hint="Кастомное время"
-        android:inputType="date|time"
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
