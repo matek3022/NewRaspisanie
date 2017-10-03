@@ -170,7 +170,7 @@ public class SwipeViewActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                toolbarTitle.setText(PagerAdapter.getTitle(position + 1, currWeek));
+                toolbarTitle.setText(PagerAdapter.getTitle(position + 1));
                 currDay = position + 1;
             }
 
@@ -227,12 +227,12 @@ public class SwipeViewActivity extends AppCompatActivity {
         int currWeek = Integer.valueOf(weekInYear.format(dateCurr));
         int firstWeek = Integer.valueOf(weekInYear.format(dateFirst));
         int numberWeek = currWeek - firstWeek + 1 + (getChangeNextWeek(dayweek, hourday) ? 1 : 0);
-        ((TextView) findViewById(R.id.week_counter)).setText("Текущая неделя: " + String.valueOf(numberWeek));
+        ((TextView) findViewById(R.id.toolbar_sub_title)).setText(String.valueOf(numberWeek) + " неделя");
         return ((numberWeek % 2 == 0) ? 2 : 1);
     }
 
     private void notifyDataChanged() {
-        toolbarTitle.setText(PagerAdapter.getTitle(currDay, currWeek));
+        toolbarTitle.setText(PagerAdapter.getTitle(currDay));
         mPagerAdapter.setCurrWeek(currWeek);
         mPagerAdapter.notifyDataSetChanged();
         Intent intent = new Intent(PageFragment.WEEK_CHANGE_RECEIVER_FILTER);
@@ -295,13 +295,13 @@ public class SwipeViewActivity extends AppCompatActivity {
         ((Switch)view.findViewById(R.id.time)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                PreferenceManager.getInstance(context).setCustomTime(b);
                 if (b) {
                     showTimeChanger();
                     dialog.dismiss();
                 } else {
                     notifyDataChanged();
                 }
-                PreferenceManager.getInstance(context).setCustomTime(b);
             }
         });
         final TextView date = (TextView) view.findViewById(R.id.first_date);
