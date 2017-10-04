@@ -27,6 +27,7 @@ public class PreferenceManager {
 
     private static final String TIME = "com.example.newraspisanie.manager.time";
     private static final String CUSTOM_TIME = "com.example.newraspisanie.manager.custom_time";
+    private static final String DROP_WEEK = "com.example.newraspisanie.manager.drop_week";
 
     private PreferenceManager(Context context){
         dataPrefs = context.getSharedPreferences(DATA_PREF, Context.MODE_PRIVATE);
@@ -84,6 +85,16 @@ public class PreferenceManager {
 
     public boolean isCustomTime() {
         return dataPrefs.getBoolean(CUSTOM_TIME, false);
+    }
+
+    public void setWeekDrop(boolean b) {
+        SharedPreferences.Editor editor = dataPrefs.edit();
+        editor.putBoolean(DROP_WEEK, b);
+        editor.apply();
+    }
+
+    public boolean isWeekDrop() {
+        return dataPrefs.getBoolean(DROP_WEEK, false);
     }
 
     public void setTime(List<String> list) {

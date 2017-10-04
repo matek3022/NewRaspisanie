@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.transition.ChangeBounds;
+import android.support.transition.Transition;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +32,7 @@ import com.example.newraspisanie.adapter.TimeListAdapter;
 import com.example.newraspisanie.manager.PreferenceManager;
 import com.example.newraspisanie.model.DictionaryItem;
 import com.example.newraspisanie.model.Para;
+import com.example.newraspisanie.transition.RotateTransition;
 import com.example.newraspisanie.view.DictionaryView;
 
 import java.text.SimpleDateFormat;
@@ -53,6 +57,13 @@ public class SwipeViewActivity extends AppCompatActivity {
     private final ArrayList<DictionaryItem> typeList = new ArrayList<>();
 
     private final ArrayList<DictionaryItem> animationList = new ArrayList<>();
+
+    private boolean transitionProcessed = false;
+    private boolean transitionPaused = false;
+    private Transition.TransitionListener listener;
+
+    private RotateTransition rotateTransition = new RotateTransition();
+    private ChangeBounds chageTransition = new ChangeBounds();
 
     public int getNumberWindow(String dayweek, String hourday) {
         int hour = Integer.parseInt(hourday);
@@ -170,12 +181,21 @@ public class SwipeViewActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                toolbarTitle.setText(PagerAdapter.getTitle(position + 1));
+                if (PreferenceManager.getInstance(context).isWeekDrop()) {
+                    toolbarTitle.setText(PagerAdapter.getTitle(position + 1, currWeek));
+                } else {
+                    toolbarTitle.setText(PagerAdapter.getTitle(position + 1));
+                }
                 currDay = position + 1;
             }
 
             @Override
             public void onPageSelected(int position) {
+                /*if (position + 1 > currDay) {
+                    animate(true);
+                } else {
+                    animate(false);
+                }*/
             }
 
             @Override
@@ -183,11 +203,69 @@ public class SwipeViewActivity extends AppCompatActivity {
             }
         });
 
+        listener = new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(@NonNull Transition transition) {
+                transitionProcessed = true;
+            }
+
+            @Override
+            public void onTransitionEnd(@NonNull Transition transition) {
+                transitionProcessed = false;
+            }
+
+            @Override
+            public void onTransitionCancel(@NonNull Transition transition) {
+            }
+
+            @Override
+            public void onTransitionPause(@NonNull Transition transition) {
+            }
+
+            @Override
+            public void onTransitionResume(@NonNull Transition transition) {
+            }
+        };
+
         Log.wtf("day_format", time_dayOfWeek + " " + time_hourInDay);
         mViewPager.setPageTransformer(true, Utils.getTransformer(PreferenceManager.getInstance(context).getAnimation()));
         mViewPager.setCurrentItem(getNumberWindow(time_dayOfWeek, time_hourInDay));
         context = this;
     }
+
+    /*private void animate(boolean b) {
+        ViewGroup sceneRoot = (ViewGroup) findViewById(R.id.sceneContainer);
+
+        // You can also inflate a generate a Scene from a layout resource file.
+        final Scene scene = Scene.getSceneForLayout(sceneRoot, b ? R.layout.scene_second : R.layout.scene_first, this);
+
+
+        TransitionSet set = new TransitionSet();
+        set.addTransition(rotateTransition);
+        set.addTransition(chageTransition);
+        // выполняться они будут одновременно
+        set.setOrdering(TransitionSet.ORDERING_SEQUENTIAL);
+        // уставим свою длительность анимации
+        set.setDuration(500);
+        // и изменим Interpolator
+        set.setInterpolator(new AccelerateInterpolator());
+        set.addListener(listener);
+        TransitionManager.go(scene, set);
+    }
+    private void animateBack() {
+        RelativeLayout scene = (RelativeLayout) findViewById(R.id.sceneContainer);
+        View square = findViewById(R.id.transition_square);
+        int newSquareSize = getResources().getDimensionPixelSize(R.dimen.double_padding);
+
+        // вызываем метод, говорящий о том, что мы хотим анимировать следующие изменения внутри sceneRoot
+        TransitionManager.beginDelayedTransition(scene);
+
+        // и применим сами изменения
+        ViewGroup.LayoutParams params = square.getLayoutParams();
+        params.width = newSquareSize;
+        params.height = newSquareSize;
+        square.setLayoutParams(params);
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -232,7 +310,11 @@ public class SwipeViewActivity extends AppCompatActivity {
     }
 
     private void notifyDataChanged() {
-        toolbarTitle.setText(PagerAdapter.getTitle(currDay));
+        if (PreferenceManager.getInstance(context).isWeekDrop()) {
+            toolbarTitle.setText(PagerAdapter.getTitle(currDay, currWeek));
+        } else {
+            toolbarTitle.setText(PagerAdapter.getTitle(currDay));
+        }
         mPagerAdapter.setCurrWeek(currWeek);
         mPagerAdapter.notifyDataSetChanged();
         Intent intent = new Intent(PageFragment.WEEK_CHANGE_RECEIVER_FILTER);
@@ -302,6 +384,14 @@ public class SwipeViewActivity extends AppCompatActivity {
                 } else {
                     notifyDataChanged();
                 }
+            }
+        });
+        ((Switch)view.findViewById(R.id.week_setting)).setChecked(PreferenceManager.getInstance(context).isWeekDrop());
+        ((Switch)view.findViewById(R.id.week_setting)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                PreferenceManager.getInstance(context).setWeekDrop(b);
+                notifyDataChanged();
             }
         });
         final TextView date = (TextView) view.findViewById(R.id.first_date);
