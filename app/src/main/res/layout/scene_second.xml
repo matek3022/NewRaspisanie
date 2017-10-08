@@ -3,9 +3,9 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
     <View
         android:id="@+id/transition_square"
-        android:layout_gravity="right|top"
-        android:rotation="60"
+        android:layout_gravity="left|top"
+        android:rotation="3600060"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/launcher"/>
+        android:background="@drawable/frog"/>
 </FrameLayout>

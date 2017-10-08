@@ -7,5 +7,5 @@
         android:rotation="240"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/launcher"/>
+        android:background="@drawable/frog"/>
 </FrameLayout>

@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.transition.ChangeBounds;
-import android.support.transition.Transition;
+import android.support.transition.Scene;
+import android.support.transition.TransitionManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -22,7 +21,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Switch;
@@ -58,12 +59,7 @@ public class SwipeViewActivity extends AppCompatActivity {
 
     private final ArrayList<DictionaryItem> animationList = new ArrayList<>();
 
-    private boolean transitionProcessed = false;
-    private boolean transitionPaused = false;
-    private Transition.TransitionListener listener;
-
     private RotateTransition rotateTransition = new RotateTransition();
-    private ChangeBounds chageTransition = new ChangeBounds();
 
     public int getNumberWindow(String dayweek, String hourday) {
         int hour = Integer.parseInt(hourday);
@@ -203,56 +199,31 @@ public class SwipeViewActivity extends AppCompatActivity {
             }
         });
 
-        listener = new Transition.TransitionListener() {
-            @Override
-            public void onTransitionStart(@NonNull Transition transition) {
-                transitionProcessed = true;
-            }
-
-            @Override
-            public void onTransitionEnd(@NonNull Transition transition) {
-                transitionProcessed = false;
-            }
-
-            @Override
-            public void onTransitionCancel(@NonNull Transition transition) {
-            }
-
-            @Override
-            public void onTransitionPause(@NonNull Transition transition) {
-            }
-
-            @Override
-            public void onTransitionResume(@NonNull Transition transition) {
-            }
-        };
-
         Log.wtf("day_format", time_dayOfWeek + " " + time_hourInDay);
         mViewPager.setPageTransformer(true, Utils.getTransformer(PreferenceManager.getInstance(context).getAnimation()));
         mViewPager.setCurrentItem(getNumberWindow(time_dayOfWeek, time_hourInDay));
         context = this;
+        animate(true);
     }
 
-    /*private void animate(boolean b) {
-        ViewGroup sceneRoot = (ViewGroup) findViewById(R.id.sceneContainer);
+    private void animate(final boolean b) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ViewGroup sceneRoot = (ViewGroup) findViewById(R.id.sceneContainer);
 
-        // You can also inflate a generate a Scene from a layout resource file.
-        final Scene scene = Scene.getSceneForLayout(sceneRoot, b ? R.layout.scene_second : R.layout.scene_first, this);
+                // You can also inflate a generate a Scene from a layout resource file.
+                final Scene scene = Scene.getSceneForLayout(sceneRoot, b ? R.layout.scene_second : R.layout.scene_first, SwipeViewActivity.this);
 
-
-        TransitionSet set = new TransitionSet();
-        set.addTransition(rotateTransition);
-        set.addTransition(chageTransition);
-        // выполняться они будут одновременно
-        set.setOrdering(TransitionSet.ORDERING_SEQUENTIAL);
-        // уставим свою длительность анимации
-        set.setDuration(500);
-        // и изменим Interpolator
-        set.setInterpolator(new AccelerateInterpolator());
-        set.addListener(listener);
-        TransitionManager.go(scene, set);
+                // уставим свою длительность анимации
+                rotateTransition.setDuration(50000000);
+                // и изменим Interpolator
+                rotateTransition.setInterpolator(new LinearInterpolator());
+                TransitionManager.go(scene, rotateTransition);
+            }
+        }).start();
     }
-    private void animateBack() {
+    /*private void animateBack() {
         RelativeLayout scene = (RelativeLayout) findViewById(R.id.sceneContainer);
         View square = findViewById(R.id.transition_square);
         int newSquareSize = getResources().getDimensionPixelSize(R.dimen.double_padding);

@@ -13,6 +13,7 @@
 
         <RelativeLayout
             android:id="@+id/toolbar_container"
+            android:layout_toRightOf="@+id/sceneContainer"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
@@ -23,7 +24,7 @@
                 android:layout_marginRight="100dp"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:paddingLeft="24dp"
+                android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:text="Суббота"
                 android:textColor="@color/textColor"
@@ -38,7 +39,7 @@
                 android:layout_marginRight="100dp"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:paddingLeft="24dp"
+                android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:text="1 неделя"
                 android:textColor="@color/textColor"
@@ -55,13 +56,10 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:visibility="gone"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
             android:id="@+id/sceneContainer"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/toolbar_container">
+            android:layout_marginLeft="16dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
 
             <include layout="@layout/scene_first" />
 
