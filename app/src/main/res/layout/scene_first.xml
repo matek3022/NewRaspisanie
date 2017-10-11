@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <View
+    <ImageView
         android:id="@+id/transition_square"
-        android:layout_gravity="left|top"
-        android:rotation="240"
+        android:rotation="0"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/frog"/>
+        android:src="@drawable/planetka"/>
+    <ImageView
+        android:id="@+id/transition_blick"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/blik"/>
 </FrameLayout>
