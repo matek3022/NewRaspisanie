@@ -1,62 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="@dimen/default_padding"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText
-        style="@style/ShapedEditText"
-        android:hint="Название пары"
-        android:id="@+id/name"
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="@dimen/default_padding"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        style="@style/ShapedEditText"
-        android:layout_marginTop="8dp"
-        android:hint="Номер аудитории"
-        android:id="@+id/auditory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        style="@style/ShapedEditText"
-        android:layout_marginTop="8dp"
+        android:layout_height="match_parent">
+        <EditText
+            style="@style/ShapedEditText"
+            android:hint="Название пары"
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            style="@style/ShapedEditText"
+            android:layout_marginTop="8dp"
+            android:hint="Номер аудитории"
+            android:id="@+id/auditory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            style="@style/ShapedEditText"
+            android:layout_marginTop="8dp"
 
-        android:hint="Дополнительное поле 1"
-        android:id="@+id/prepod_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        style="@style/ShapedEditText"
-        android:layout_marginTop="8dp"
-        android:hint="Дополнительное поле 2"
-        android:id="@+id/extended"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        style="@style/ShapedEditText"
-        android:layout_marginTop="8dp"
-        android:hint="Кастомное время"
-        android:id="@+id/time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <com.example.newraspisanie.view.DictionaryView
-        android:layout_marginTop="@dimen/default_padding"
-        android:id="@+id/numberWeek"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <com.example.newraspisanie.view.DictionaryView
-        android:layout_marginTop="@dimen/default_padding"
-        android:id="@+id/week_day"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <com.example.newraspisanie.view.DictionaryView
-        android:layout_marginTop="@dimen/default_padding"
-        android:id="@+id/number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <com.example.newraspisanie.view.DictionaryView
-        android:layout_marginTop="@dimen/default_padding"
-        android:id="@+id/type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+            android:hint="Дополнительное поле 1"
+            android:id="@+id/prepod_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            style="@style/ShapedEditText"
+            android:layout_marginTop="8dp"
+            android:hint="Дополнительное поле 2"
+            android:id="@+id/extended"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            style="@style/ShapedEditText"
+            android:layout_marginTop="8dp"
+            android:hint="Кастомное время"
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            style="@style/ShapedEditText"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:layout_marginTop="8dp"
+            android:hint="Подробнее"
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.example.newraspisanie.view.DictionaryView
+            android:layout_marginTop="@dimen/default_padding"
+            android:id="@+id/numberWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.example.newraspisanie.view.DictionaryView
+            android:layout_marginTop="@dimen/default_padding"
+            android:id="@+id/week_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.example.newraspisanie.view.DictionaryView
+            android:layout_marginTop="@dimen/default_padding"
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.example.newraspisanie.view.DictionaryView
+            android:layout_marginTop="@dimen/default_padding"
+            android:id="@+id/type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</ScrollView>

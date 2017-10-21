@@ -17,6 +17,8 @@ public class Para implements Serializable {
     private String extended;
     private String time;
 
+    private String info;
+
     public Para() {
     }
 
@@ -72,6 +74,14 @@ public class Para implements Serializable {
 
     public String getTime() {
         return time;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public void setName(String name) {

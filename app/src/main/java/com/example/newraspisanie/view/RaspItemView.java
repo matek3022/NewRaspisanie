@@ -4,17 +4,24 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.transition.ChangeBounds;
+import android.support.transition.Fade;
+import android.support.transition.TransitionManager;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
+import android.transition.Explode;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.newraspisanie.R;
 import com.example.newraspisanie.manager.PreferenceManager;
 import com.example.newraspisanie.model.Para;
+import com.example.newraspisanie.transition.RotateTransition;
 
 import java.util.List;
 
@@ -55,7 +62,18 @@ public class RaspItemView extends LinearLayout {
     @BindView(R.id.card_parent)
     CardView cardView;
 
+    @BindView(R.id.root)
+    ViewGroup root;
+
+    @BindView(R.id.infoButtonContainer)
+    FrameLayout infoButtonContainer;
+    @BindView(R.id.infoButton)
+    ImageView infoButton;
+    @BindView(R.id.info)
+    TextView info;
+
     private Para para;
+    private boolean opened;
 
     public RaspItemView(Context context) {
         super(context);
@@ -94,6 +112,9 @@ public class RaspItemView extends LinearLayout {
         clearView();
         this.para = para;
         if (para != null) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                Explode explode = new Explode();
+            }
             boolean customTime = PreferenceManager.getInstance(getContext()).isCustomTime();
             List<String> customTimeList = PreferenceManager.getInstance(getContext()).getTime();
             switch (para.getNumber()) {
@@ -138,6 +159,16 @@ public class RaspItemView extends LinearLayout {
             auditory.setText(para.getAuditory());
             prepodName.setText(para.getNamePrepod());
             extended.setText(para.getExtended());
+            if (!TextUtils.isEmpty(para.getInfo())) {
+                infoButtonContainer.setVisibility(VISIBLE);
+                info.setText(para.getInfo());
+            } else {
+                infoButtonContainer.setVisibility(GONE);
+                info.setText("");
+            }
+            infoButton.setRotation(0);
+            info.setVisibility(GONE);
+            opened = false;
         }
     }
 
@@ -155,12 +186,48 @@ public class RaspItemView extends LinearLayout {
         auditory.setText("");
         prepodName.setText("");
         extended.setText("");
+        info.setText("");
+        infoButtonContainer.setVisibility(GONE);
+        infoButton.setRotation(0);
+        info.setVisibility(GONE);
+        opened = false;
+    }
+
+
+    private void processInfo() {
+        ChangeBounds changeBounds = new ChangeBounds();
+        changeBounds.setDuration(500);
+        Fade fade = new Fade();
+        fade.setDuration(500);
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(500);
+        if (opened) {
+            TransitionManager.beginDelayedTransition((ViewGroup) cardView.getRootView(), changeBounds);
+            TransitionManager.beginDelayedTransition(root, fade);
+            info.setVisibility(GONE);
+            TransitionManager.beginDelayedTransition(infoButtonContainer, rotateTransition);
+            infoButton.setRotation(0);
+            opened = false;
+        } else {
+            TransitionManager.beginDelayedTransition((ViewGroup) cardView.getRootView(), changeBounds);
+            TransitionManager.beginDelayedTransition(root, fade);
+            info.setVisibility(VISIBLE);
+            TransitionManager.beginDelayedTransition(infoButtonContainer, rotateTransition);
+            infoButton.setRotation(180);
+            opened = true;
+        }
     }
 
     private void init() {
         removeAllViews();
         View view = View.inflate(getContext(), R.layout.layout_rasp_item_view, (ViewGroup) getParent());
         ButterKnife.bind(this, view);
+        infoButtonContainer.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                processInfo();
+            }
+        });
         addView(view);
     }
 }

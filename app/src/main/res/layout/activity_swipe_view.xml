@@ -13,6 +13,7 @@
 
         <RelativeLayout
             android:id="@+id/toolbar_container"
+            android:paddingLeft="16dp"
             android:layout_toRightOf="@+id/sceneContainer"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -24,7 +25,6 @@
                 android:layout_marginRight="100dp"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:text="Суббота"
                 android:textColor="@color/textColor"
@@ -39,7 +39,6 @@
                 android:layout_marginRight="100dp"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:text="1 неделя"
                 android:textColor="@color/textColor"
@@ -56,6 +55,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/sceneContainer"
             android:layout_marginLeft="16dp"
             android:layout_width="50dp"
@@ -69,7 +69,7 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sceneContainer"
+            android:layout_below="@+id/toolbar_container"
             tools:layout="@layout/fragment">
 
         </android.support.v4.view.ViewPager>

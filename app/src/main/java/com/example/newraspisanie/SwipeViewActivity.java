@@ -475,6 +475,7 @@ public class SwipeViewActivity extends AppCompatActivity {
         final TextView prepodName = (TextView) innerView.findViewById(R.id.prepod_name);
         final TextView extended = (TextView) innerView.findViewById(R.id.extended);
         final TextView time = (TextView) innerView.findViewById(R.id.time);
+        final TextView info = (TextView) innerView.findViewById(R.id.info);
 
         final DictionaryView number = (DictionaryView) innerView.findViewById(R.id.number);
         final DictionaryView numberDay = (DictionaryView) innerView.findViewById(R.id.week_day);
@@ -502,6 +503,7 @@ public class SwipeViewActivity extends AppCompatActivity {
             prepodName.setText(para.getNamePrepod());
             extended.setText(para.getExtended());
             time.setText(para.getTime());
+            info.setText(para.getInfo());
             number.setSelected(para.getNumber());
             numberDay.setSelected(para.getWeekDay());
             numberWeek.setSelected(para.getWeek());
@@ -517,6 +519,7 @@ public class SwipeViewActivity extends AppCompatActivity {
                 para.setNamePrepod(prepodName.getText().toString());
                 para.setExtended(extended.getText().toString());
                 para.setTime(time.getText().toString());
+                para.setInfo(info.getText().toString());
                 para.setNumber(number.getSelected().getId());
                 para.setWeek(numberWeek.getSelected().getId());
                 para.setWeekDay(numberDay.getSelected().getId());
